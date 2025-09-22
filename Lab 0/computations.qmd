@@ -32,10 +32,5 @@ from plotnine.data import mpg
 )
 ```
 
-```{python}
-#| echo: false
-#| label: nobs
-(
-    len(mpg)
-)
-```
+
+There are `{python} len(mpg)` observations in our data.
