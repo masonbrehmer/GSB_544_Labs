@@ -1,9 +1,7 @@
 ---
 title: Quarto Computations
-echo: false
 format: 
   html: 
-    code-fold: true
     embed-resources: true
 
 ---
@@ -31,5 +29,13 @@ from plotnine.data import mpg
     + scale_color_continuous()
     + theme_bw()
     + theme(figure_size=(6, 3.5))
+)
+```
+
+```{python}
+#| echo: false
+#| label: nobs
+(
+    len(mpg)
 )
 ```
