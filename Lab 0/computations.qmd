@@ -18,6 +18,7 @@ Additionally, mileage is higher for cars with fewer cylinders.
 #| label: scatterplot
 #| echo: true
 #| code-fold: true
+#| code-line-numbers: true
 (
     ggplot(mpg, aes(x="hwy", y="cty", color="cyl"))
     + geom_point(alpha=0.5, size=2)
