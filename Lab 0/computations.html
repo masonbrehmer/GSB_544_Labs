@@ -2196,21 +2196,17 @@ vertical-align: -.125em;
 
 
 <p>This dataset contains a subset of the fuel economy data from the EPA.</p>
-<div id="load-packages" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p><a href="#fig-scatterplot" class="quarto-xref">Figure 1</a> shows a positive, strong, and linear relationship between the city and highway mileage of these cars.</p>
 <div id="cell-fig-scatterplot" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    ggplot(mpg, aes(x<span class="op">=</span><span class="st">&quot;hwy&quot;</span>, y<span class="op">=</span><span class="st">&quot;cty&quot;</span>, color<span class="op">=</span><span class="st">&quot;cyl&quot;</span>))</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="op">+</span> scale_color_continuous()</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="op">+</span> theme_bw()</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="op">+</span> theme(figure_size<span class="op">=</span>(<span class="dv">6</span>, <span class="fl">3.5</span>))</span>
-<span id="cb2-7"><a href="#cb2-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    ggplot(mpg, aes(x<span class="op">=</span><span class="st">&quot;hwy&quot;</span>, y<span class="op">=</span><span class="st">&quot;cty&quot;</span>, color<span class="op">=</span><span class="st">&quot;cyl&quot;</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="op">+</span> scale_color_continuous()</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="op">+</span> theme_bw()</span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="op">+</span> theme(figure_size<span class="op">=</span>(<span class="dv">6</span>, <span class="fl">3.5</span>))</span>
+<span id="cb1-7"><a href="#cb1-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-scatterplot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of city vs. highway mileage for cars, where points are colored by the number of cylinders. The plot displays a positive, linear, and strong relationship between city and highway mileage, and mileage increases as the number of cylinders decreases.">

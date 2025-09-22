@@ -1,5 +1,6 @@
 ---
 title: Quarto Computations
+echo: false
 format: 
   html: 
     embed-resources: true
