@@ -1,6 +1,8 @@
 ---
 title: Quarto Computations
-echo: false
+format: 
+  html: 
+    code-fold: true
 ---
 
 This dataset contains a subset of the fuel economy data from the EPA.
