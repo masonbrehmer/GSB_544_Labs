@@ -32,29 +32,79 @@ my_data = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q1data.
 my_data
 ```
 
-
 ```{python}
+ # Creating my ggplot with the same aesthetics as the gapminder plot. 
 Q1_plot = (
     p9.ggplot(my_data, p9.aes(
         x = "income", 
         y = "life_exp", 
-        fill = "four_regions", 
+        color = "four_regions", 
         size = "population")) 
-    + p9.geom_point(alpha = 0.7)
-    + p9.annotate("text", x=20000, y=20, label="2010", # Found annotate function with Chat by asking how I could use to put faded letters behind my graph.
-              size=80, alpha=0.1, color="gray")
-    + p9.scale_x_log10 
-    (
+    # Plotting it as a bubble chart.
+     + p9.geom_point(alpha=1)
+    # Used chat to add a second layer to create black borders for my bubbles. 
+     + p9.geom_point(shape='o', color='black', fill='none',
+                    stroke=0.5, alpha=.5, show_legend=False)
+
+    # Found annotate function with Chat by asking how I could use to put faded letters behind my graph.
+    # Using annotate function to put the 2010 watermark behind the bubbles. 
+    + p9.annotate("text", x=5600, y=56, label="2010", 
+              size=200, alpha=0.15, color="gray")
+    # Scaling with area like gapminder.
+    + p9.scale_size_area(max_size = 40, guide = None)
+    # Scaling the x-axis on a log scale, I used breaks and labels to ensure the x-axis looked and acted like gapminder.
+    + p9.scale_x_log10 (
         limits=(500, 64000),
         breaks=[500, 1000, 2000, 4000, 8000, 16000, 32000, 64000],
-        labels=["500","1k","2k","4k","8k","16k","32k","64k"]
-    )
-    + p9.scale_y_continuous
-    (
+        labels=["500","1000","2000","4000","8000","16k","32k","64k"]
+      )
+    # Only using breaks for the y-axis.
+    + p9.scale_y_continuous(
         limits=(20,90),
         breaks=[20, 30, 40, 50, 60, 70, 80, 90]
+      )
+
+    # Used chat to find this function and toggled through colors in quarto till I found colors that looked similar. 
+    + p9.scale_color_manual(values={
+    "asia": "#f4626aff",      # red-ish
+    "africa": "#4dddf7ff",    # blue-ish
+    "europe": "#f3fc03ff",    # yellow-ish
+    "americas": "#5af562ff",  # green-ish
+},
+    breaks=["africa", "americas", "asia", "europe"] #Took out the N/A data from the legend.
     )
+    # Using the annotate function from earlier to add the Income Level text at the top of the chart. 
+    + p9.annotate("text", x=1000,   y=89, label=" INCOME LEVEL 1",
+                  size=10, color="#999999", ha="center")
+    + p9.annotate("text", x=4000,  y=89, label="LEVEL 2",
+                  size=10, color="#999999", ha="center")
+    + p9.annotate("text", x=16000,  y=89, label="LEVEL 3",
+                  size=10, color="#999999", ha="center")
+    + p9.annotate("text", x=60000, y=89, label="LEVEL 4",
+                  size=10, color="#999999", ha="center")
+    # Used chat to figure out how to add a diamond, to put in between the income level text.
+    + p9.annotate("point", x=2500,  y=89, shape='D', size=3,
+                  color="#999999", fill="#999999")
+    + p9.annotate("point", x=8000,  y=89, shape='D', size=3,
+                  color="#999999", fill="#999999")
+    + p9.annotate("point", x=32000, y=89, shape='D', size=3,
+                  color="#999999", fill="#999999")
+    
+    # Using minimal theme and a wider figure to emphasize the x-axis span.
+    + p9.theme_minimal()
+    + p9.theme(
+    figure_size=(13, 7),  # wider without changing your scales
+    plot_title=p9.element_text(size=16, weight="bold", ha="center"),
+    plot_subtitle=p9.element_text(size=11, color="#999999", ha="center"),
 )
+    # Using the labs function to add in the correct names to the x and y axis labels.
+    + p9.labs(
+        x="Income",
+        y="Life expectancy",
+        color="Region"  
+      )
+)
+#Show the plot output. 
 Q1_plot
 
 ```
