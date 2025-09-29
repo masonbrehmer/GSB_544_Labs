@@ -1,9 +1,60 @@
 ---
 title: "Lab 1"
 author: "Mason Brehmer"
-format:
- html:
+format: 
+  html:
     embed-resources: true
     code-fold: true
+    toc: true
+echo: true
+theme: sketchy
+
 ---
 
+# Task 1:
+
+1. The aesthetics are: 
+
+- Income on the x-axis 
+
+- Life expectancy on the y-axis
+
+- Bubbles colored by World Region
+
+- Bubble size by country population
+
+```{python}
+import pandas as pd
+import plotnine as p9
+
+my_data = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q1data.csv")
+
+my_data
+```
+
+
+```{python}
+Q1_plot = (
+    p9.ggplot(my_data, p9.aes(
+        x = "income", 
+        y = "life_exp", 
+        fill = "four_regions", 
+        size = "population")) 
+    + p9.geom_point(alpha = 0.7)
+    + p9.annotate("text", x=20000, y=20, label="2010", # Found annotate function with Chat by asking how I could use to put faded letters behind my graph.
+              size=80, alpha=0.1, color="gray")
+    + p9.scale_x_log10 
+    (
+        limits=(500, 64000),
+        breaks=[500, 1000, 2000, 4000, 8000, 16000, 32000, 64000],
+        labels=["500","1k","2k","4k","8k","16k","32k","64k"]
+    )
+    + p9.scale_y_continuous
+    (
+        limits=(20,90),
+        breaks=[20, 30, 40, 50, 60, 70, 80, 90]
+    )
+)
+Q1_plot
+
+```
