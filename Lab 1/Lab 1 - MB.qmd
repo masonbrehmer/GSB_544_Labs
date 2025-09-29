@@ -229,3 +229,74 @@ Q2_plot
 
 
 ```
+
+# Task 3
+1. The aesthetics are: 
+
+- Individuals using the Internet on the x-axis 
+
+- GDP/capita on the y-axis
+
+- Bubbles colored by World Region
+
+- Bubble size by income
+
+
+```{python}
+#importing pandas and plotnine and reading in the first dataset
+import pandas as pd
+import plotnine as p9
+
+my_data_3 = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q3data.csv")
+my_data_3
+```
+
+
+```{python}
+Q3_plot = (
+    p9.ggplot(my_data_3, p9.aes(
+        x="internet_users", 
+        y="gdp", 
+        size="income", 
+        color="four_regions"
+    )) 
+    # Bubbles (semi-transparent, thin border look)
+    + p9.geom_point(alpha=0.6, stroke=0.3)
+    + p9.geom_point(shape='o', color='black', fill='none',
+                    stroke=0.5, alpha=.2, show_legend=False)
+    # Year watermark
+    + p9.annotate("text", 
+                  x=40, y=5000,   # center-ish for this scale
+                  label="2001", 
+                  size=200, alpha=0.15, color="gray")
+    # Bubble size scaling
+    + p9.scale_size_area(max_size=12, guide=None)
+    # Axis scales
+    + p9.scale_x_continuous(
+        limits=(0, 100),
+        breaks=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    )
+    + p9.scale_y_log10(
+    limits=(200, 120000),
+    breaks=[200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+    )
+    # Custom region colors
+    + p9.scale_color_manual(values={
+        "asia": "#f4626aff",
+        "africa": "#4dddf7ff",
+        "europe": "#f3fc03ff",
+        "americas": "#5af562ff",
+    },
+    breaks=["africa", "americas", "asia", "europe"])
+    # Theme
+    + p9.theme_minimal()
+    + p9.theme(figure_size=(13, 7))
+    # Labels
+    + p9.labs(
+        x="Individuals using the Internet (% of population)",
+        y="GDP per capita (US$, inflation-adjusted)",
+        color="Region"
+    )
+)
+Q3_plot
+```
