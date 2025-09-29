@@ -7,7 +7,7 @@ format:
     code-fold: true
     toc: true
 echo: true
-theme: sketchy
+theme: cosmo
 
 ---
 
@@ -23,7 +23,9 @@ theme: sketchy
 
 - Bubble size by country population
 
+2. 
 ```{python}
+#importing pandas and plotnine and reading in the first dataset
 import pandas as pd
 import plotnine as p9
 
@@ -32,6 +34,7 @@ my_data = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q1data.
 my_data
 ```
 
+3.
 ```{python}
  # Creating my ggplot with the same aesthetics as the gapminder plot. 
 Q1_plot = (
@@ -106,5 +109,123 @@ Q1_plot = (
 )
 #Show the plot output. 
 Q1_plot
+
+```
+
+4. The plot maps two continuous variables, income and life_exp, to the x and y-axes. A categorical variable, four_regions, is mapped to the color aesthetic, while another continuous variable, population, is mapped to the size aesthetic. The data visualization ggplot cheatsheet shows a list of functions that work for two continuous variables one being geom_smooth. 
+
+```{python}
+Q1_plot2 = (p9.ggplot(my_data, p9.aes(
+        x = "income", 
+        y = "life_exp", 
+        color = "four_regions", 
+        size = "population"))
+    + p9.geom_smooth(method="lm", se=False, size=1.2)   # simple linear trend per region
+    + p9.scale_x_log10 (
+        limits=(500, 64000),
+        breaks=[500, 1000, 2000, 4000, 8000, 16000, 32000, 64000],
+        labels=["500","1000","2000","4000","8000","16k","32k","64k"]
+      )
+    # Only using breaks for the y-axis.
+    + p9.scale_y_continuous(
+        limits=(20,90),
+        breaks=[20, 30, 40, 50, 60, 70, 80, 90]
+        )                              
+    + p9.theme_minimal()
+    + p9.labs(x="Income (log scale)", y="Life expectancy", color="Region",
+              title="Linear trends by region")
+    
+)
+Q1_plot2
+```
+
+In this case, this geometry is not great as a data visualization tool. If geom_smooth had been used subsequently with geom_point it may have been more useful to see the line of best fit for each country, however alone the visualization doesn't show much and without the points we can only see how the four regions act together we can't see individual target countries we might want to focus on.
+
+# Task 2
+1. The aesthetics are: 
+
+- Exports % of GDP on the x-axis 
+
+- Imports % of GDP on the y-axis
+
+- Bubbles colored by World Region
+
+- Bubble size by energy
+
+2. 
+```{python}
+#importing pandas and plotnine and reading in the first dataset
+import pandas as pd
+import plotnine as p9
+
+my_data_2 = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q2data.csv")
+
+my_data_2['exports'] = pd.to_numeric(my_data_2['exports'], errors='coerce')
+my_data_2['imports'] = pd.to_numeric(my_data_2['imports'], errors='coerce')
+my_data_2['energy'] = pd.to_numeric(my_data_2['energy'], errors='coerce')
+my_data_2
+```
+
+3. 
+
+```{python}
+# Naming the regions we are looking for to drop any observations without a region.
+valid_regions = ["asia", "africa", "europe", "americas"]
+# Used chat to ask to sort the data so it would plot smaller bubbles on top of the larger bubbles. 
+my_data_sorted = (
+    my_data_2[my_data_2["four_regions"].isin(valid_regions)]
+    .sort_values("energy", ascending=False)
+)
+
+# Creating ggplot with specific aesthetics.
+Q2_plot = (
+    p9.ggplot(my_data_sorted, p9.aes(
+        x="exports", 
+        y="imports", 
+        size="energy", 
+        color="four_regions"   # region mapped to fill color
+    )) 
+    # Filling the bubbles solid and giving a slight black border.
+    + p9.geom_point(alpha=1, stroke=0.3)
+    + p9.geom_point(shape='o', color='black', fill='none',
+                    stroke=0.2, alpha=.2, show_legend=False)
+
+    # 1997 watermark done with similar style as Task 1. 
+    + p9.annotate("text", 
+                  x=110, y=200, 
+                  label="1997", 
+                  size=200, alpha=0.15, color="gray")
+    # Scaling bubble size by area. 
+    + p9.scale_size_area(max_size=15, guide=None)
+    # Scaling the x and y axis.
+    + p9.scale_x_continuous(
+        limits=(0, 220),
+        breaks=[20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220]
+    )
+    + p9.scale_y_continuous(
+        limits=(0, 400),
+        breaks=[50, 100, 150, 200, 250, 300, 350, 400]
+    )
+    # Picked the same region colors. 
+    + p9.scale_color_manual(values={
+        "asia": "#f4626aff",
+        "africa": "#4dddf7ff",
+        "europe": "#f3fc03ff",
+        "americas": "#5af562ff",
+    },
+    breaks=["africa", "americas", "asia", "europe"])
+    # Used the same theme. 
+    + p9.theme_minimal()
+    + p9.theme(figure_size=(13, 7))
+    # Created new labels export and imports. 
+    + p9.labs(
+        x="Exports (% of GDP)",
+        y="Imports (% of GDP)",
+        color="Region"
+    )
+)
+Q2_plot
+
+
 
 ```
