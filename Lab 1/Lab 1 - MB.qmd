@@ -1,0 +1,9 @@
+---
+title: "Lab 1"
+author: "Mason Brehmer"
+format:
+ html:
+    embed-resources: true
+    code-fold: true
+---
+
