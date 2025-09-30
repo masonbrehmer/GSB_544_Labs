@@ -11,6 +11,8 @@ theme: cosmo
 
 ---
 
+[View the GitHub Repository](https://github.com/masonbrehmer/GSB_544_Labs)
+
 # Task 1:
 
 1. The aesthetics are: 
@@ -97,8 +99,6 @@ Q1_plot = (
     + p9.theme_minimal()
     + p9.theme(
     figure_size=(13, 7),  # wider without changing your scales
-    plot_title=p9.element_text(size=16, weight="bold", ha="center"),
-    plot_subtitle=p9.element_text(size=11, color="#999999", ha="center"),
 )
     # Using the labs function to add in the correct names to the x and y axis labels.
     + p9.labs(
@@ -154,12 +154,13 @@ In this case, this geometry is not great as a data visualization tool. If geom_s
 
 2. 
 ```{python}
-#importing pandas and plotnine and reading in the first dataset
+#importing pandas and plotnine and reading in the second dataset
 import pandas as pd
 import plotnine as p9
 
 my_data_2 = pd.read_csv("C:/Users/mason/OneDrive/Desktop/GSB_544_Labs/Data/q2data.csv")
 
+#Used chat to find a function to clean the data to work
 my_data_2['exports'] = pd.to_numeric(my_data_2['exports'], errors='coerce')
 my_data_2['imports'] = pd.to_numeric(my_data_2['imports'], errors='coerce')
 my_data_2['energy'] = pd.to_numeric(my_data_2['energy'], errors='coerce')
@@ -293,6 +294,7 @@ my_data_3
 
 
 ```{python}
+# Adding aesthetics 
 Q3_plot = (
     p9.ggplot(my_data_3, p9.aes(
         x="internet_users", 
@@ -300,11 +302,11 @@ Q3_plot = (
         size="income", 
         color="four_regions"
     )) 
-    # Bubbles (semi-transparent, thin border look)
+    # Creating the bubbles with a black border
     + p9.geom_point(alpha=0.6, stroke=0.3)
     + p9.geom_point(shape='o', color='black', fill='none',
                     stroke=0.5, alpha=.2, show_legend=False)
-    # Year watermark
+    # Adding 2001 in the background
     + p9.annotate("text", 
                   x=40, y=5000,   # center-ish for this scale
                   label="2001", 
