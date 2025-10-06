@@ -12,6 +12,9 @@ format:
 import pandas as pd
 import numpy as np
 import plotnine as p9
+#looked on chat how to get rid of scientific notation in python
+pd.set_option('display.float_format', '{:.2f}'.format)
+
 ```
 
 ```{python}
@@ -58,20 +61,10 @@ other = [
     "Northern New England", "South Carolina"
 ]
 
-
-```
-
-```{python}
-def classify_geo_type(geo):
-    if geo in cities:
-        return "City"
-    elif geo in main_regions:
-        return "region"
-    elif geo == "Total U.S.":
-        return "US"
-    else:
-        return "state"  # for entries like South Carolina or Northern New England (if treated separately)
-
+# Total U.S.
+US = [
+    "Total U.S."
+]
 
 
 ```
@@ -84,6 +77,7 @@ avocado_clean = avocado.copy()
 avocado_clean["geo_type"] = "other"
 avocado_clean.loc[avocado_clean["geography"].isin(main_regions), "geo_type"] = "region"
 avocado_clean.loc[avocado_clean["geography"].isin(cities), "geo_type"] = "city"
+avocado_clean.loc[avocado_clean["geography"].isin(US),"geo_type"] = "US"
 
 
 # Preview the cleaned dataset
@@ -102,7 +96,8 @@ avocado_clean.head()
 ```
 
 
-3. 
+3. Which major geographical region sold the most total organic, small Hass avocados in 2017?
+
 ```{python}
 #Creating a new dataset called avocado_clean_so for question 3 finding which region sells the most small avocadoes. 
 avocado_clean_so = avocado_clean[avocado_clean["geo_type"] == "region"]
@@ -124,4 +119,39 @@ avocado_clean_so.groupby("geography")["small_avocado"]
 
 # Display the results
 region_small_totals
+```
+
+As the sum output shows, the West region produced the largest volume of organic, small avocadoes at 1,870,206.29 in the year 2017. 
+
+4. Split the date variable into month, day, and year variables. In which month is the highest average volume of avocado sales?
+
+```{python}
+# Converting the data into datetime to work with my function
+avocado_clean["date"] = pd.to_datetime(avocado_clean["date"])
+#Adding columns for month, day, and a new year column in case some data doesn't match.
+avocado_clean["month"] = avocado_clean["date"].dt.month
+avocado_clean["day"] = avocado_clean["date"].dt.day
+avocado_clean["year2"] = avocado_clean["date"].dt.year
+
+avocado_clean.head()
+```
+
+```{python}
+# Creating a new dataset that only includes Total U.S. Sales for each year.
+avocado_clean_TUS = avocado_clean[avocado_clean["geo_type"] == "US"]
+
+avocado_clean_TUS.head(50)
+```
+
+
+```{python}
+#Finding the highest monthly average.
+highest_monthly_avg = (
+avocado_clean_TUS.groupby("month")["total_volume"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+# Display the results
+highest_monthly_avg
 ```
