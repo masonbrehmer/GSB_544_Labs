@@ -282,6 +282,7 @@ price_diff.head()
 From this table output, it's easy to see that the largest price difference between organic and conventional avocados is in the San Francisco region and is .72$. The visualization below also allows us to see that San Francisco has the largest difference with Los Angeles having the smallest difference.
 
 ```{python}
+#Creating bar charts for each california city to see the differences between each cities (organic v. conventional) price differences.
 price_diff_vis = (
     p9.ggplot(price_diff, p9.aes(x="geography", y="price_difference", fill = "geography"))
     + p9.geom_col(show_legend=False)
@@ -295,5 +296,111 @@ price_diff_vis = (
 )
 
 price_diff_vis
+
+```
+
+8. The following plot shows, for all four California regions, the proportion of the average Hass avocado sales that are small, large, or extra large; conventional vs. organic. Recreate the plot; you do not have to replicate the exact finishing touches - e.g., color, theme - but your plot should resemble the content of this plot.
+
+
+```{python}
+
+#Keeping only the columns we need to create the visualization
+avocado_california = avocado_california[["geography", "type","small_avocado","large_avocado","xlarge_avocado"]]
+
+
+```
+
+```{python}
+# Creating three new columns with the mean avocado sale volume for each size avocado.
+avocado_california["avg_small"] = avocado_california.groupby(
+    ["geography", "type"]
+)["small_avocado"].transform("mean")
+
+avocado_california["avg_large"] = avocado_california.groupby(
+    ["geography", "type"]
+)["large_avocado"].transform("mean")
+
+avocado_california["avg_xlarge"] = avocado_california.groupby(
+    ["geography", "type"]
+)["xlarge_avocado"].transform("mean")
+
+
+```
+
+```{python}
+#Creating a total average volume column by adding each size value together.
+avocado_california["total_avg_volume"] = (
+    avocado_california["avg_small"]
+    + avocado_california["avg_large"]
+    + avocado_california["avg_xlarge"]
+)
+
+
+```
+
+```{python}
+#Creating columns for the proportion of each size of avocado sale volume to the total sale volume
+avocado_california["small"] = (
+    avocado_california["avg_small"] / avocado_california["total_avg_volume"]
+)
+avocado_california["large"] = (
+    avocado_california["avg_large"] / avocado_california["total_avg_volume"]
+)
+avocado_california["xlarge"] = (
+    avocado_california["avg_xlarge"] / avocado_california["total_avg_volume"]
+)
+
+```
+
+```{python}
+#Asked chat what the best way to make it so only one record of each cities ratio for both conventional and organic.
+avocado_california = avocado_california.drop_duplicates(subset=["geography", "type"])
+
+```
+
+```{python}
+# Changed the dataset to have one size and proportion column for all sizes. 
+avocado_california = avocado_california.melt(
+    id_vars=["geography", "type"],
+    value_vars=["small", "large", "xlarge"],
+    var_name="size",
+    value_name="proportion"
+)
+
+# Plot initially had the bars stacked in a strange order so I asked if there was a function to ensure that the bars go from small > large > xlarge.
+avocado_california["size"] = pd.Categorical(
+    avocado_california["size"],
+    categories=["xlarge", "large", "small"],
+    ordered=True
+)
+
+avocado_california.head()
+
+
+```
+
+```{python}
+
+# Remaking plot from the lab 
+plot_remake = (
+    p9.ggplot(
+        avocado_california,
+        p9.aes(x="geography", y="proportion", fill="size")
+        )
+    + p9.geom_col(position="fill")
+    #Asked chat what plotnine funciton would let me have two different charts side by side
+    + p9.facet_wrap("~type")
+    + p9.labs(
+        title="Proportion of Average Hass Avocado Sales by Size",
+        x="Region of California",
+        y="Proportion"
+    )
+    + p9.theme_bw()
+    + p9.theme(
+        figure_size=(9, 5)
+    )
+)
+
+plot_remake
 
 ```
