@@ -1,0 +1,127 @@
+---
+title: Lab 2
+echo: false
+format: 
+  html: 
+    embed-resources: true
+
+---
+
+
+```{python}
+import pandas as pd
+import numpy as np
+import plotnine as p9
+```
+
+```{python}
+# Import the avocado dataset
+avocado = pd.read_csv(r"C:\Users\mason\OneDrive\Desktop\GSB_544_Labs\Lab 2\avocado-updated-2020.csv")
+
+# Check data types and non-null counts
+avocado.info()
+
+```
+
+```{python}
+# View the first few rows
+avocado.head()
+```
+
+1.Briefly describe the data set. What information does it contain?
+
+This avocado dataset contains a wide range of information about weekly avocado sales across different U.S. regions. The data includes the average retail price of avocados sold, the total sales volume, and counts for different avocado sizes based on PLU codes. It also provides details such as region, year, type (conventional or organic), and the number of avocados sold in various bag sizes. The output above displays the data types and the first few rows of the dataset, giving a clear view of how the original data is structured.
+
+2. Clean the data in any way you see fit.
+
+```{python}
+# Creating a variable containing just the names of the defined main regions
+main_regions = ["California", "Great Lakes", "Midsouth", "Northeast",
+                "Plains", "Southeast", "South Central", "West"]
+
+# Used chat to create a variable called cities with all the city names within the dataset
+cities = [
+    "Albany", "Atlanta", "Baltimore/Washington", "Boise", "Boston",
+    "Buffalo/Rochester", "Charlotte", "Chicago", "Cincinnati/Dayton",
+    "Columbus", "Dallas/Ft. Worth", "Denver", "Detroit", "Grand Rapids",
+    "Harrisburg/Scranton", "Hartford/Springfield", "Houston", "Indianapolis",
+    "Jacksonville", "Las Vegas", "Los Angeles", "Louisville",
+    "Miami/Ft. Lauderdale", "Nashville", "New Orleans/Mobile", "New York",
+    "Orlando", "Philadelphia", "Phoenix/Tucson", "Pittsburgh", "Portland",
+    "Raleigh/Greensboro", "Richmond/Norfolk", "Roanoke", "Sacramento",
+    "San Diego", "San Francisco", "Seattle", "Spokane", "St. Louis",
+    "Syracuse", "Tampa", "West Tex/New Mexico",
+]
+
+#Used chat to find any of the other names wihtin the dataset.
+other = [
+    "Northern New England", "South Carolina"
+]
+
+
+```
+
+```{python}
+def classify_geo_type(geo):
+    if geo in cities:
+        return "City"
+    elif geo in main_regions:
+        return "region"
+    elif geo == "Total U.S.":
+        return "US"
+    else:
+        return "state"  # for entries like South Carolina or Northern New England (if treated separately)
+
+
+
+```
+
+```{python}
+# Making the avocado_clean dataset with the data cleaned.
+avocado_clean = avocado.copy()
+
+# Adding in the geo_type column using .where logic
+avocado_clean["geo_type"] = "other"
+avocado_clean.loc[avocado_clean["geography"].isin(main_regions), "geo_type"] = "region"
+avocado_clean.loc[avocado_clean["geography"].isin(cities), "geo_type"] = "city"
+
+
+# Preview the cleaned dataset
+avocado_clean.head()
+```
+
+```{python}
+# Changing the numbered avocado column names to their correct terms.
+avocado_clean = avocado_clean.rename(columns={
+    "4046": "small_avocado",
+    "4225": "large_avocado",
+    "4770": "xlarge_avocado"
+})
+
+avocado_clean.head()
+```
+
+
+3. 
+```{python}
+#Creating a new dataset called avocado_clean_so for question 3 finding which region sells the most small avocadoes. 
+avocado_clean_so = avocado_clean[avocado_clean["geo_type"] == "region"]
+
+avocado_clean_so = avocado_clean_so[avocado_clean_so["year"] == 2017]
+
+avocado_clean_so = avocado_clean_so[avocado_clean_so["type"] == "organic"]
+
+avocado_clean_so = avocado_clean_so[avocado_clean_so["geo_type"]== "region"]
+avocado_clean_so.head()
+```
+
+```{python}
+region_small_totals = (
+avocado_clean_so.groupby("geography")["small_avocado"]
+    .sum()
+    .sort_values(ascending=False)
+)
+
+# Display the results
+region_small_totals
+```
