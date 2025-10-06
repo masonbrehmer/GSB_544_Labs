@@ -1,9 +1,11 @@
 ---
 title: Lab 2
-echo: false
+echo: true
 format: 
   html: 
     embed-resources: true
+    code-fold: true
+    toc: true
 
 ---
 
@@ -22,13 +24,8 @@ pd.set_option('display.float_format', '{:.2f}'.format)
 avocado = pd.read_csv(r"C:\Users\mason\OneDrive\Desktop\GSB_544_Labs\Lab 2\avocado-updated-2020.csv")
 
 # Check data types and non-null counts
-avocado.info()
+# avocado.info() don't want it in the final output
 
-```
-
-```{python}
-# View the first few rows
-avocado.head()
 ```
 
 1.Briefly describe the data set. What information does it contain?
@@ -80,8 +77,6 @@ avocado_clean.loc[avocado_clean["geography"].isin(cities), "geo_type"] = "city"
 avocado_clean.loc[avocado_clean["geography"].isin(US),"geo_type"] = "US"
 
 
-# Preview the cleaned dataset
-avocado_clean.head()
 ```
 
 ```{python}
@@ -92,6 +87,7 @@ avocado_clean = avocado_clean.rename(columns={
     "4770": "xlarge_avocado"
 })
 
+#Preview our cleaned dataset
 avocado_clean.head()
 ```
 
@@ -107,7 +103,7 @@ avocado_clean_so = avocado_clean_so[avocado_clean_so["year"] == 2017]
 avocado_clean_so = avocado_clean_so[avocado_clean_so["type"] == "organic"]
 
 avocado_clean_so = avocado_clean_so[avocado_clean_so["geo_type"]== "region"]
-avocado_clean_so.head()
+
 ```
 
 ```{python}
@@ -133,14 +129,14 @@ avocado_clean["month"] = avocado_clean["date"].dt.month
 avocado_clean["day"] = avocado_clean["date"].dt.day
 avocado_clean["year2"] = avocado_clean["date"].dt.year
 
-avocado_clean.head()
+
 ```
 
 ```{python}
 # Creating a new dataset that only includes Total U.S. Sales for each year.
 avocado_clean_TUS = avocado_clean[avocado_clean["geo_type"] == "US"]
 
-avocado_clean_TUS.head(50)
+
 ```
 
 
@@ -154,4 +150,150 @@ avocado_clean_TUS.groupby("month")["total_volume"]
 
 # Display the results
 highest_monthly_avg
+```
+
+As we can see by our output, month 5 which is MAY has the largest average total volume of avocados sold.
+
+5. Which metro area geographical regions sold the most total avocados? Plot side-by-side box-plots of the total volume for only the five metro geographical regions with the highest averages for the total_volume variable.
+
+
+```{python}
+# Creating a new dataset that only includes Total U.S. Sales for each year.
+avocado_clean_metro = avocado_clean[avocado_clean["geo_type"] == "city"]
+
+```
+
+
+```{python}
+#First I am going to use a mean function to find the top 5 metros. Remember I defined all of the cities within the geography column as a metro area. 
+
+top5_metros = (
+    avocado_clean_metro.groupby("geography")["total_volume"]
+    .mean()
+    .sort_values(ascending=False)
+    .head(5)
+)
+
+top5_metros
+```
+
+We can see from the output that the Los Angeles metro region sold the most total avocados overall. 
+
+```{python}
+# Creating a variable Metros that includes the top 5 metros we found above. 
+Metros = [
+        "Los Angeles", "New York", "Dallas/Ft. Worth", "Houston", "Phoenix/Tucson"
+]
+#Now creating another new dataset that includes only the top 5 metro areas. 
+avocado_top5 = avocado_clean_metro[
+    avocado_clean_metro["geography"].isin(Metros)
+]
+
+```
+
+
+Below is the boxplot for our top 5 metro cities.
+```{python}
+
+# Used chat to help me define more breaks to make the visualization more understandable.
+y_axis_breaks = [1000000, 2000000, 3000000, 4000000, 5000000]
+
+top_5_plot = (
+    p9.ggplot(avocado_top5, p9.aes(x="geography", y="total_volume", fill="geography"))
+    + p9.geom_boxplot(show_legend=False)
+    + p9.scale_y_continuous(breaks=y_axis_breaks)
+    + p9.labs(
+        title="Total Avocado Sales Distribution: Top 5 Metro Areas",
+        x="Metro Area",
+        y="Total Volume Sold"
+            )
+             
+    + p9.theme_bw()
+)
+
+top_5_plot   
+
+```
+
+6. From your cleaned data set, create a data set with only these California regions and answer the following questions about these California regions only.
+
+```{python}
+#Creating a variable California with all the cities we are looking at
+California = [
+    "Los Angeles", "San Diego", "Sacramento","San Francisco"
+]
+# Creating a new dataset with the variables we need.
+avocado_california = avocado_clean[avocado_clean["geography"].isin(California)]
+avocado_california.head()
+```
+
+7. In which California regions is the price of organic versus conventional avocados most different? Support your answer with a few summary statistics AND a visualization.
+
+```{python}
+#Creating two different datasets one with only california/organic and one with california/conventional. 
+avocado_california_organic = avocado_california[avocado_california["type"]=="organic"]
+avocado_california_organic.head()
+
+avocado_california_not = avocado_california[avocado_california["type"]!="organic"]
+avocado_california_not.head()
+```
+```{python}
+#Finding average organic sale price.
+avg_sp_organic = (
+    avocado_california_organic.groupby("geography")["average_price"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+avg_sp_organic
+```
+
+```{python}
+#Finding average conventional sale price.
+avg_sp_nonorg = (
+    avocado_california_not.groupby("geography")["average_price"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+avg_sp_nonorg
+```
+
+```{python}
+#I asked chat what the best way of computing the difference with code would be and it told me to merge the two tables I've just created with this code.
+
+# Convert to dataframes
+avg_sp_organic_df = avg_sp_organic.to_frame(name="avg_price_organic").reset_index()
+avg_sp_nonorg_df = avg_sp_nonorg.to_frame(name="avg_price_conventional").reset_index()
+
+# Merge on geography
+price_diff = avg_sp_organic_df.merge(avg_sp_nonorg_df, on="geography")
+
+
+# Then I just created a new column that was the average price of organic subtracted by avg price of conventional.
+price_diff["price_difference"] = (
+    price_diff["avg_price_organic"] - price_diff["avg_price_conventional"]
+)
+
+price_diff.head()
+
+```
+
+From this table output, it's easy to see that the largest price difference between organic and conventional avocados is in the San Francisco region and is .72$. The visualization below also allows us to see that San Francisco has the largest difference with Los Angeles having the smallest difference.
+
+```{python}
+price_diff_vis = (
+    p9.ggplot(price_diff, p9.aes(x="geography", y="price_difference", fill = "geography"))
+    + p9.geom_col(show_legend=False)
+    + p9.theme_bw()
+    + p9.labs(
+        title="Organic vs. Conventional Avocado Price Differences by California City",
+        x="Cities in California",
+        y="Price Difference (Organic - Conventional)"
+    )
+     
+)
+
+price_diff_vis
+
 ```
