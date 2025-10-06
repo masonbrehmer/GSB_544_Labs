@@ -1,5 +1,5 @@
 ---
-title: Lab 2
+title: Lab 2 - Mason Brehmer
 echo: true
 format: 
   html: 
@@ -8,7 +8,7 @@ format:
     toc: true
 
 ---
-
+[View the GitHub Repository](https://github.com/masonbrehmer/GSB_544_Labs/tree/main)
 
 ```{python}
 import pandas as pd
@@ -404,3 +404,63 @@ plot_remake = (
 plot_remake
 
 ```
+
+9. Joining new Dataset
+
+```{python}
+
+#Creating a variable California with all the cities we are looking at
+California = [
+    "Los Angeles", "San Diego", "Sacramento","San Francisco"
+]
+# Creating a new dataset with the variables we need.
+avocado_california_old = avocado_clean[avocado_clean["geography"].isin(California)]
+avocado_california_old.head()
+
+```
+
+```{python}
+# Import the housing dataset
+housing = pd.read_csv(r"C:\Users\mason\OneDrive\Desktop\GSB_544_Labs\Lab 2\Housing_data_redfin.csv")
+housing.head()
+housing.columns
+
+```
+
+```{python}
+#Renaming the column names so the join is easier
+housing = housing.rename(columns={
+    "Region": "geography",
+    "Year of Period End": "year",
+    "Median Sale Price": "median_home_price"
+})
+
+```
+
+```{python}
+avocado_joined = avocado_california_old.merge(housing, on=["geography","year"], how="inner")
+
+avocado_joined.head(20)
+```
+
+```{python}
+housing_plot = (
+    p9.ggplot(avocado_joined, p9.aes(x="median_home_price", y="average_price", color="geography"))
+    + p9.geom_point()
+    + p9.labs(
+        title="Home Prices vs. Avocado Prices Across California Regions",
+        x="Median Home Price ($)",
+        y="Average Avocado Price ($)"
+    )
+    + p9.theme_bw()
+     + p9.theme(
+        figure_size=(15, 5)
+    )
+)
+
+housing_plot
+
+
+```
+
+This plot shows that San Francisco with the largest median home prices and the highest average higher avacado prices. Pushing me towards an assumption that when the median home prices are larger the average avocado price will also be larger.
