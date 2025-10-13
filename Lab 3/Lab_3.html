@@ -2211,7 +2211,7 @@ vertical-align: -.125em;
 
 
 <p><a href="https://github.com/masonbrehmer/GSB_544_Labs/tree/main">View the GitHub Repository</a></p>
-<div id="cell-1" class="cell" data-execution_count="227">
+<div id="cell-1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -2219,7 +2219,7 @@ vertical-align: -.125em;
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>xmas2 <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://www.dropbox.com/scl/fi/p9x9k8xwuzs9rhp582vfy/xmas_2.csv?rlkey=kvc3j3lmyn4opcidsrhcmrof1&amp;dl=1&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e864258d-9472-4f8c-b7d9-eaf855a86e2e" data-execution_count="228">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e864258d-9472-4f8c-b7d9-eaf855a86e2e" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xmas.info()</span>
@@ -2256,7 +2256,7 @@ memory usage: 708.0+ bytes</code></pre>
 </div>
 <section id="function-1-and-unit-tests" class="level1">
 <h1>Function 1 and Unit Tests</h1>
-<div id="cell-4" class="cell" data-execution_count="229">
+<div id="cell-4" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # This was my initial code for the first function but it needed to be vectorized so I commented it out</span></span>
@@ -2286,7 +2286,7 @@ memory usage: 708.0+ bytes</code></pre>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   return gift</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-5" class="cell" data-execution_count="230">
+<div id="cell-5" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Vectorized funciton 1</span></span>
@@ -2305,48 +2305,21 @@ memory usage: 708.0+ bytes</code></pre>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> plural</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:36}}" data-outputid="468064d4-e7ec-4f10-d316-9a312fecd90b" data-execution_count="231">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:115}}" data-outputid="cb65e95f-011c-40be-da98-d79ab1305ca8" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Should work</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pluralize_gift(<span class="st">&quot;goose&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asked chat to build two unit tests</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pluralize_gift_vec(pd.Series([<span class="st">&quot;goose&quot;</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="231">
-<pre><code>&#39;geese&#39;</code></pre>
+<div class="cell-output cell-output-display">
+<pre><code>0    geese
+dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:115}}" data-outputid="cb65e95f-011c-40be-da98-d79ab1305ca8" data-execution_count="232">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e8cf9c89-ef8e-430d-cc81-87549074313c" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asked chat to build two unit tests</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pluralize_gift_vec(pd.Series([<span class="st">&quot;goose&quot;</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="232">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">0</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>geese</td>
-</tr>
-</tbody>
-</table>
-
-</div><br><label><b>dtype:</b> object</label>
-</div>
-</div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e8cf9c89-ef8e-430d-cc81-87549074313c" data-execution_count="233">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pluralize_gift_vec(pd.Series([<span class="st">&quot;goose&quot;</span>, <span class="st">&quot;lady&quot;</span>, <span class="st">&quot;ring&quot;</span>, <span class="st">&quot;lebron&quot;</span>, ])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pluralize_gift_vec(pd.Series([<span class="st">&quot;goose&quot;</span>, <span class="st">&quot;lady&quot;</span>, <span class="st">&quot;ring&quot;</span>, <span class="st">&quot;lebron&quot;</span>, ])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0      geese
@@ -2356,82 +2329,32 @@ memory usage: 708.0+ bytes</code></pre>
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:460}}" data-outputid="f519e18b-873b-4b98-a9bd-c13a6029b3a2" data-execution_count="234">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:460}}" data-outputid="f519e18b-873b-4b98-a9bd-c13a6029b3a2" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Will work if your function is vectorized!</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pluralize_gift_vec(xmas[<span class="st">&#39;Gift.Item&#39;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Will work if your function is vectorized!</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pluralize_gift_vec(xmas[<span class="st">&#39;Gift.Item&#39;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="234">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Gift.Item</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>partridges</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>doves</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>hens</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>birds</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>rings</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>geese</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>swans</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>maids</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>ladies</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>lords</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>pipers</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>drummers</td>
-</tr>
-</tbody>
-</table>
-
-</div><br><label><b>dtype:</b> object</label>
+<div class="cell-output cell-output-display">
+<pre><code>0     partridges
+1          doves
+2           hens
+3          birds
+4          rings
+5          geese
+6          swans
+7          maids
+8         ladies
+9          lords
+10        pipers
+11      drummers
+Name: Gift.Item, dtype: object</code></pre>
 </div>
 </div>
 </section>
 <section id="function-2-and-unit-tests" class="level1">
 <h1>Function 2 and Unit Tests</h1>
-<div id="cell-11" class="cell" data-execution_count="235">
+<div id="cell-10" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_phrase(num, num_word, item, verb, adjective, location):</span>
@@ -2498,7 +2421,7 @@ dtype: object</code></pre>
 <span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> phrase</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-12" class="cell" data-execution_count="236">
+<div id="cell-11" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapping words to ensure our phrasing is correct and says two not second</span></span>
@@ -2512,7 +2435,7 @@ dtype: object</code></pre>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>xmas2[<span class="st">&quot;Day_in_words&quot;</span>] <span class="op">=</span> xmas2[<span class="st">&quot;Day&quot;</span>].<span class="bu">map</span>(mapping_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="b275cbe1-1a28-4e51-acd4-5eaf71ea175e" data-execution_count="237">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="b275cbe1-1a28-4e51-acd4-5eaf71ea175e" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the extra column with the full phrase to our xmas dataframe to get ready for the final step</span></span>
@@ -2526,9 +2449,8 @@ dtype: object</code></pre>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>xmas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="237">
-<div id="df-78b48980-07e0-4cb8-b4bd-7af0583a313a" class="colab-df-container">
-    <div>
+<div class="cell-output cell-output-display">
+<div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -2682,251 +2604,9 @@ dtype: object</code></pre>
 </table>
 
 </div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive(&#39;df-78b48980-07e0-4cb8-b4bd-7af0583a313a&#39;)" title="Convert this dataframe to an interactive table." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
-  </svg>
-    </button>
-
-  <style>
-.colab-df-container {
-display:flex;
-gap: 12px;
-}
-.colab-df-convert {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-convert:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-.colab-df-buttons div {
-margin-bottom: 4px;
-}
-[theme=dark] .colab-df-convert {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-convert:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-78b48980-07e0-4cb8-b4bd-7af0583a313a button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-78b48980-07e0-4cb8-b4bd-7af0583a313a');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-0d2182f6-5070-4bce-ac79-48a3f05341e4">
-      <button class="colab-df-quickchart" onclick="quickchart(&#39;df-0d2182f6-5070-4bce-ac79-48a3f05341e4&#39;)" title="Suggest charts" style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-    </g>
-</svg>
-      </button>
-
-<style>
-.colab-df-quickchart {
---bg-color: #E8F0FE;
---fill-color: #1967D2;
---hover-bg-color: #E2EBFA;
---hover-fill-color: #174EA6;
---disabled-fill-color: #AAA;
---disabled-bg-color: #DDD;
-}
-[theme=dark] .colab-df-quickchart {
---bg-color: #3B4455;
---fill-color: #D2E3FC;
---hover-bg-color: #434B5C;
---hover-fill-color: #FFFFFF;
---disabled-bg-color: #3B4455;
---disabled-fill-color: #666;
-}
-.colab-df-quickchart {
-background-color: var(--bg-color);
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: var(--fill-color);
-height: 32px;
-padding: 0;
-width: 32px;
-}
-.colab-df-quickchart:hover {
-background-color: var(--hover-bg-color);
-box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: var(--button-hover-fill-color);
-}
-.colab-df-quickchart-complete:disabled,
-.colab-df-quickchart-complete:disabled:hover {
-background-color: var(--disabled-bg-color);
-fill: var(--disabled-fill-color);
-box-shadow: none;
-}
-.colab-df-spinner {
-border: 2px solid var(--fill-color);
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-animation:
-spin 1s steps(1) infinite;
-}
-@keyframes spin {
-0% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-border-left-color: var(--fill-color);
-}
-20% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-30% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-border-right-color: var(--fill-color);
-}
-40% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-60% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-}
-80% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-bottom-color: var(--fill-color);
-}
-90% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-}
-}
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-0d2182f6-5070-4bce-ac79-48a3f05341e4 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_fbdc1636-eaaf-423d-a412-0b35cf1afb7c">
-    <style>
-.colab-df-generate {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-generate:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-[theme=dark] .colab-df-generate {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-generate:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-    <button class="colab-df-generate" onclick="generateWithVariable(&#39;xmas&#39;)" title="Generate code using this dataframe." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z" />
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_fbdc1636-eaaf-423d-a412-0b35cf1afb7c button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('xmas');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
 </div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="63cb6992-14be-401a-bf6f-fcd0e6bf1f56" data-execution_count="238">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="63cb6992-14be-401a-bf6f-fcd0e6bf1f56" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding the extra column with full phrase to our xmas2 dataframe to get ready for the final step</span></span>
@@ -2940,9 +2620,8 @@ fill: #FFFFFF;
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>xmas2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="238">
-<div id="df-b7788e1a-9d40-450f-9f6f-55f3992bccf3" class="colab-df-container">
-    <div>
+<div class="cell-output cell-output-display">
+<div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -3096,251 +2775,9 @@ fill: #FFFFFF;
 </table>
 
 </div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive(&#39;df-b7788e1a-9d40-450f-9f6f-55f3992bccf3&#39;)" title="Convert this dataframe to an interactive table." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
-  </svg>
-    </button>
-
-  <style>
-.colab-df-container {
-display:flex;
-gap: 12px;
-}
-.colab-df-convert {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-convert:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-.colab-df-buttons div {
-margin-bottom: 4px;
-}
-[theme=dark] .colab-df-convert {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-convert:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-b7788e1a-9d40-450f-9f6f-55f3992bccf3 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-b7788e1a-9d40-450f-9f6f-55f3992bccf3');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-9d394324-03b1-4270-8d73-b2beef11bc46">
-      <button class="colab-df-quickchart" onclick="quickchart(&#39;df-9d394324-03b1-4270-8d73-b2beef11bc46&#39;)" title="Suggest charts" style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-    </g>
-</svg>
-      </button>
-
-<style>
-.colab-df-quickchart {
---bg-color: #E8F0FE;
---fill-color: #1967D2;
---hover-bg-color: #E2EBFA;
---hover-fill-color: #174EA6;
---disabled-fill-color: #AAA;
---disabled-bg-color: #DDD;
-}
-[theme=dark] .colab-df-quickchart {
---bg-color: #3B4455;
---fill-color: #D2E3FC;
---hover-bg-color: #434B5C;
---hover-fill-color: #FFFFFF;
---disabled-bg-color: #3B4455;
---disabled-fill-color: #666;
-}
-.colab-df-quickchart {
-background-color: var(--bg-color);
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: var(--fill-color);
-height: 32px;
-padding: 0;
-width: 32px;
-}
-.colab-df-quickchart:hover {
-background-color: var(--hover-bg-color);
-box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: var(--button-hover-fill-color);
-}
-.colab-df-quickchart-complete:disabled,
-.colab-df-quickchart-complete:disabled:hover {
-background-color: var(--disabled-bg-color);
-fill: var(--disabled-fill-color);
-box-shadow: none;
-}
-.colab-df-spinner {
-border: 2px solid var(--fill-color);
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-animation:
-spin 1s steps(1) infinite;
-}
-@keyframes spin {
-0% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-border-left-color: var(--fill-color);
-}
-20% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-30% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-border-right-color: var(--fill-color);
-}
-40% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-60% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-}
-80% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-bottom-color: var(--fill-color);
-}
-90% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-}
-}
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-9d394324-03b1-4270-8d73-b2beef11bc46 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_1d477923-0a99-4283-80d2-3f54e231fe53">
-    <style>
-.colab-df-generate {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-generate:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-[theme=dark] .colab-df-generate {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-generate:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-    <button class="colab-df-generate" onclick="generateWithVariable(&#39;xmas2&#39;)" title="Generate code using this dataframe." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z" />
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_1d477923-0a99-4283-80d2-3f54e231fe53 button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('xmas2');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
 </div>
 </div>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:178}}" data-outputid="c2b7ac21-bc32-477f-ab72-2f1ed5f688e0" data-execution_count="239">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:178}}" data-outputid="c2b7ac21-bc32-477f-ab72-2f1ed5f688e0" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asked chat to create a mock data unit test</span></span>
@@ -3356,45 +2793,21 @@ fill: #FFFFFF;
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Step 2 output</span></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>make_phrase(df[<span class="st">&quot;num&quot;</span>], df[<span class="st">&quot;num_word&quot;</span>], df[<span class="st">&quot;item&quot;</span>], df[<span class="st">&quot;verb&quot;</span>], df[<span class="st">&quot;adjective&quot;</span>], df[<span class="st">&quot;location&quot;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="239">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">0</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>an artridge a-singing in a pear tree</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>five golden rings a-shining by the fire</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>six geese a-laying on the lake</td>
-</tr>
-</tbody>
-</table>
-
-</div><br><label><b>dtype:</b> object</label>
+<div class="cell-output cell-output-display">
+<pre><code>0       an artridge a-singing in a pear tree
+1    five golden rings a-shining by the fire
+2             six geese a-laying on the lake
+dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="87331458-25d9-4947-b74b-8f00b2923046" data-execution_count="240">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="87331458-25d9-4947-b74b-8f00b2923046" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas dataset</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>xmas[[<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Full.Phrase&quot;</span>]].head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas dataset</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>xmas[[<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Full.Phrase&quot;</span>]].head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="240">
-<div id="df-8eebb7ee-dcf0-4d95-b5b6-0c1249f8a1ae" class="colab-df-container">
-    <div>
+<div class="cell-output cell-output-display">
+<div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -3470,210 +2883,16 @@ fill: #FFFFFF;
 </table>
 
 </div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive(&#39;df-8eebb7ee-dcf0-4d95-b5b6-0c1249f8a1ae&#39;)" title="Convert this dataframe to an interactive table." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
-  </svg>
-    </button>
-
-  <style>
-.colab-df-container {
-display:flex;
-gap: 12px;
-}
-.colab-df-convert {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-convert:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-.colab-df-buttons div {
-margin-bottom: 4px;
-}
-[theme=dark] .colab-df-convert {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-convert:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-8eebb7ee-dcf0-4d95-b5b6-0c1249f8a1ae button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-8eebb7ee-dcf0-4d95-b5b6-0c1249f8a1ae');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-40a5db6a-ffa9-465f-a773-1aaddf517ca7">
-      <button class="colab-df-quickchart" onclick="quickchart(&#39;df-40a5db6a-ffa9-465f-a773-1aaddf517ca7&#39;)" title="Suggest charts" style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-    </g>
-</svg>
-      </button>
-
-<style>
-.colab-df-quickchart {
---bg-color: #E8F0FE;
---fill-color: #1967D2;
---hover-bg-color: #E2EBFA;
---hover-fill-color: #174EA6;
---disabled-fill-color: #AAA;
---disabled-bg-color: #DDD;
-}
-[theme=dark] .colab-df-quickchart {
---bg-color: #3B4455;
---fill-color: #D2E3FC;
---hover-bg-color: #434B5C;
---hover-fill-color: #FFFFFF;
---disabled-bg-color: #3B4455;
---disabled-fill-color: #666;
-}
-.colab-df-quickchart {
-background-color: var(--bg-color);
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: var(--fill-color);
-height: 32px;
-padding: 0;
-width: 32px;
-}
-.colab-df-quickchart:hover {
-background-color: var(--hover-bg-color);
-box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: var(--button-hover-fill-color);
-}
-.colab-df-quickchart-complete:disabled,
-.colab-df-quickchart-complete:disabled:hover {
-background-color: var(--disabled-bg-color);
-fill: var(--disabled-fill-color);
-box-shadow: none;
-}
-.colab-df-spinner {
-border: 2px solid var(--fill-color);
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-animation:
-spin 1s steps(1) infinite;
-}
-@keyframes spin {
-0% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-border-left-color: var(--fill-color);
-}
-20% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-30% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-border-right-color: var(--fill-color);
-}
-40% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-60% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-}
-80% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-bottom-color: var(--fill-color);
-}
-90% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-}
-}
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-40a5db6a-ffa9-465f-a773-1aaddf517ca7 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-    </div>
-  </div>
 </div>
 </div>
-<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="9dab22de-5711-475a-8acf-ea51df467354" data-execution_count="241">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="9dab22de-5711-475a-8acf-ea51df467354" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas2 dataset</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>xmas2[[<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Full.Phrase&quot;</span>]].head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas2 dataset</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>xmas2[[<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Full.Phrase&quot;</span>]].head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="241">
-<div id="df-5b9c40b5-b7ed-4295-aea4-6cfacad90a82" class="colab-df-container">
-    <div>
+<div class="cell-output cell-output-display">
+<div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -3749,260 +2968,67 @@ border-bottom-color: var(--fill-color);
 </table>
 
 </div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive(&#39;df-5b9c40b5-b7ed-4295-aea4-6cfacad90a82&#39;)" title="Convert this dataframe to an interactive table." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
-  </svg>
-    </button>
-
-  <style>
-.colab-df-container {
-display:flex;
-gap: 12px;
-}
-.colab-df-convert {
-background-color: #E8F0FE;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: #1967D2;
-height: 32px;
-padding: 0 0 0 0;
-width: 32px;
-}
-.colab-df-convert:hover {
-background-color: #E2EBFA;
-box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: #174EA6;
-}
-.colab-df-buttons div {
-margin-bottom: 4px;
-}
-[theme=dark] .colab-df-convert {
-background-color: #3B4455;
-fill: #D2E3FC;
-}
-[theme=dark] .colab-df-convert:hover {
-background-color: #434B5C;
-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-fill: #FFFFFF;
-}
-</style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-5b9c40b5-b7ed-4295-aea4-6cfacad90a82 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-5b9c40b5-b7ed-4295-aea4-6cfacad90a82');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-d850889e-3d66-41c1-8738-8eef62d8c923">
-      <button class="colab-df-quickchart" onclick="quickchart(&#39;df-d850889e-3d66-41c1-8738-8eef62d8c923&#39;)" title="Suggest charts" style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-    </g>
-</svg>
-      </button>
-
-<style>
-.colab-df-quickchart {
---bg-color: #E8F0FE;
---fill-color: #1967D2;
---hover-bg-color: #E2EBFA;
---hover-fill-color: #174EA6;
---disabled-fill-color: #AAA;
---disabled-bg-color: #DDD;
-}
-[theme=dark] .colab-df-quickchart {
---bg-color: #3B4455;
---fill-color: #D2E3FC;
---hover-bg-color: #434B5C;
---hover-fill-color: #FFFFFF;
---disabled-bg-color: #3B4455;
---disabled-fill-color: #666;
-}
-.colab-df-quickchart {
-background-color: var(--bg-color);
-border: none;
-border-radius: 50%;
-cursor: pointer;
-display: none;
-fill: var(--fill-color);
-height: 32px;
-padding: 0;
-width: 32px;
-}
-.colab-df-quickchart:hover {
-background-color: var(--hover-bg-color);
-box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-fill: var(--button-hover-fill-color);
-}
-.colab-df-quickchart-complete:disabled,
-.colab-df-quickchart-complete:disabled:hover {
-background-color: var(--disabled-bg-color);
-fill: var(--disabled-fill-color);
-box-shadow: none;
-}
-.colab-df-spinner {
-border: 2px solid var(--fill-color);
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-animation:
-spin 1s steps(1) infinite;
-}
-@keyframes spin {
-0% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-border-left-color: var(--fill-color);
-}
-20% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-30% {
-border-color: transparent;
-border-left-color: var(--fill-color);
-border-top-color: var(--fill-color);
-border-right-color: var(--fill-color);
-}
-40% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-top-color: var(--fill-color);
-}
-60% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-}
-80% {
-border-color: transparent;
-border-right-color: var(--fill-color);
-border-bottom-color: var(--fill-color);
-}
-90% {
-border-color: transparent;
-border-bottom-color: var(--fill-color);
-}
-}
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-d850889e-3d66-41c1-8738-8eef62d8c923 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-    </div>
-  </div>
 </div>
 </div>
 </section>
 <section id="function-3-and-final-output" class="level1">
 <h1>Function 3 and Final output</h1>
-<div id="cell-19" class="cell">
+<div id="cell-18" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sing_day(dataset, num, phrase_col):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns a string with a song for days of Christmas</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">  Parameters</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">  ----------</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">  dataset : pandas dataframe</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Dataset with the song lyrics</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">  num : int</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Day number</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">  phrase_col : str</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Column name with the phrase</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">  Return</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">  ------</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">  str</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Song for the given day</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"> </span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">  &quot;&quot;&quot;</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 1: Setup the intro line</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mapping to make sure that the intro has first, second, third etc.</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  number_word_map <span class="op">=</span> {</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="st">&quot;first&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;second&quot;</span>, <span class="dv">3</span>: <span class="st">&quot;third&quot;</span>, <span class="dv">4</span>: <span class="st">&quot;fourth&quot;</span>,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>: <span class="st">&quot;fifth&quot;</span>, <span class="dv">6</span>: <span class="st">&quot;sixth&quot;</span>, <span class="dv">7</span>: <span class="st">&quot;seventh&quot;</span>, <span class="dv">8</span>: <span class="st">&quot;eighth&quot;</span>,</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="dv">9</span>: <span class="st">&quot;ninth&quot;</span>, <span class="dv">10</span>: <span class="st">&quot;tenth&quot;</span>, <span class="dv">11</span>: <span class="st">&quot;eleventh&quot;</span>, <span class="dv">12</span>: <span class="st">&quot;twelfth&quot;</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  num_word <span class="op">=</span> number_word_map[num]</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  intro <span class="op">=</span> <span class="st">&quot;On the &quot;</span> <span class="op">+</span> num_word <span class="op">+</span> <span class="st">&quot; day of Christmas, my true love sent to me:&quot;</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 2: Sing the gift phrases</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Hint: What order are they gifts sung in each day</span></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  gifts <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Looping backwards from the current day down</span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Locating the phrase in hte dataset that matches the current day</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> dataset.loc[dataset[<span class="st">&quot;Day&quot;</span>] <span class="op">==</span> i, phrase_col].values[<span class="dv">0</span>]</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> num <span class="op">!=</span> <span class="dv">1</span>:</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Adds and if we are on the first day and it was not the first verse for the output. </span></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>        gifts <span class="op">+=</span> <span class="st">&quot;and &quot;</span> <span class="op">+</span> line <span class="op">+</span> <span class="st">&quot;.&quot;</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>        gifts <span class="op">+=</span> line <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 4: Combine intro and verses , strip removes the whitespace or linebreaks at the end of the string. </span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  song <span class="op">=</span> intro <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">+</span> gifts.strip()</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> song</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sing_day(dataset, num, phrase_col):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns a string with a song for days of Christmas</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">  Parameters</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">  ----------</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">  dataset : pandas dataframe</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Dataset with the song lyrics</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">  num : int</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Day number</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">  phrase_col : str</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Column name with the phrase</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">  Return</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">  ------</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">  str</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Song for the given day</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"> </span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">  &quot;&quot;&quot;</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 1: Setup the intro line</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mapping to make sure that the intro has first, second, third etc.</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  number_word_map <span class="op">=</span> {</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="st">&quot;first&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;second&quot;</span>, <span class="dv">3</span>: <span class="st">&quot;third&quot;</span>, <span class="dv">4</span>: <span class="st">&quot;fourth&quot;</span>,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>: <span class="st">&quot;fifth&quot;</span>, <span class="dv">6</span>: <span class="st">&quot;sixth&quot;</span>, <span class="dv">7</span>: <span class="st">&quot;seventh&quot;</span>, <span class="dv">8</span>: <span class="st">&quot;eighth&quot;</span>,</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>        <span class="dv">9</span>: <span class="st">&quot;ninth&quot;</span>, <span class="dv">10</span>: <span class="st">&quot;tenth&quot;</span>, <span class="dv">11</span>: <span class="st">&quot;eleventh&quot;</span>, <span class="dv">12</span>: <span class="st">&quot;twelfth&quot;</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  num_word <span class="op">=</span> number_word_map[num]</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  intro <span class="op">=</span> <span class="st">&quot;On the &quot;</span> <span class="op">+</span> num_word <span class="op">+</span> <span class="st">&quot; day of Christmas, my true love sent to me:&quot;</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 2: Sing the gift phrases</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Hint: What order are they gifts sung in each day</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  gifts <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Looping backwards from the current day down</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Locating the phrase in hte dataset that matches the current day</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> dataset.loc[dataset[<span class="st">&quot;Day&quot;</span>] <span class="op">==</span> i, phrase_col].values[<span class="dv">0</span>]</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> num <span class="op">!=</span> <span class="dv">1</span>:</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Adds and if we are on the first day and it was not the first verse for the output. </span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>        gifts <span class="op">+=</span> <span class="st">&quot;and &quot;</span> <span class="op">+</span> line <span class="op">+</span> <span class="st">&quot;.&quot;</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        gifts <span class="op">+=</span> line <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 4: Combine intro and verses , strip removes the whitespace or linebreaks at the end of the string. </span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  song <span class="op">=</span> intro <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">+</span> gifts.strip()</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> song</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d22b7308-39d5-4130-d6f8-d0a2a544a646" data-execution_count="243">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d22b7308-39d5-4130-d6f8-d0a2a544a646" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the twelfth day of Christmas, my true love sent to me:
@@ -4020,10 +3046,31 @@ two turtle doves
 and a partridge in a pear tree.</code></pre>
 </div>
 </div>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cee70a3a-edf5-47fa-d68c-6711bb9929f9" data-execution_count="244">
+<div id="cell-20" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">8</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>On the twelfth day of Christmas, my true love sent to me:
+twelve hours sleeping
+eleven friends goodbye-ing
+ten loads of laundry
+nine parties bumping
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cee70a3a-edf5-47fa-d68c-6711bb9929f9" data-execution_count="24">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">8</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the eighth day of Christmas, my true love sent to me:
@@ -4037,15 +3084,14 @@ two meal points
 and an email from Cal Poly.</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="929c23b8-e507-47b5-b321-95b9cad9f309" data-execution_count="245">
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="929c23b8-e507-47b5-b321-95b9cad9f309" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">2</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">1</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>On the second day of Christmas, my true love sent to me:
-two turtle doves
-and a partridge in a pear tree.</code></pre>
+<pre><code>On the first day of Christmas, my true love sent to me:
+a partridge in a pear tree</code></pre>
 </div>
 </div>
 </section>
