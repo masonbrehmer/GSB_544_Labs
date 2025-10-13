@@ -2211,7 +2211,7 @@ vertical-align: -.125em;
 
 
 <p><a href="https://github.com/masonbrehmer/GSB_544_Labs/tree/main">View the GitHub Repository</a></p>
-<div id="cell-1" class="cell" data-execution_count="7">
+<div id="cell-1" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -2219,7 +2219,7 @@ vertical-align: -.125em;
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>xmas2 <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://www.dropbox.com/scl/fi/p9x9k8xwuzs9rhp582vfy/xmas_2.csv?rlkey=kvc3j3lmyn4opcidsrhcmrof1&amp;dl=1&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e864258d-9472-4f8c-b7d9-eaf855a86e2e" data-execution_count="8">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e864258d-9472-4f8c-b7d9-eaf855a86e2e" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xmas.info()</span>
@@ -2256,7 +2256,7 @@ memory usage: 708.0+ bytes</code></pre>
 </div>
 <section id="function-1-and-unit-tests" class="level1">
 <h1>Function 1 and Unit Tests</h1>
-<div id="cell-4" class="cell" data-execution_count="9">
+<div id="cell-4" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # This was my initial code for the first function but it needed to be vectorized so I commented it out</span></span>
@@ -2286,9 +2286,7 @@ memory usage: 708.0+ bytes</code></pre>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   return gift</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-5" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Code</summary>
+<div id="cell-5" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Vectorized funciton 1</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pluralize_gift_vec(gifts):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    plural <span class="op">=</span> gifts <span class="op">+</span> <span class="st">&quot;s&quot;</span></span>
@@ -2303,9 +2301,8 @@ memory usage: 708.0+ bytes</code></pre>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                         gifts.<span class="bu">str</span>.replace(<span class="st">&quot;oo&quot;</span>, <span class="st">&quot;ee&quot;</span>, regex<span class="op">=</span><span class="va">False</span>))</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> plural</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:115}}" data-outputid="cb65e95f-011c-40be-da98-d79ab1305ca8" data-execution_count="11">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:115}}" data-outputid="cb65e95f-011c-40be-da98-d79ab1305ca8" data-execution_count="53">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asked chat to build two unit tests</span></span>
@@ -2316,7 +2313,7 @@ memory usage: 708.0+ bytes</code></pre>
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e8cf9c89-ef8e-430d-cc81-87549074313c" data-execution_count="12">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e8cf9c89-ef8e-430d-cc81-87549074313c" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pluralize_gift_vec(pd.Series([<span class="st">&quot;goose&quot;</span>, <span class="st">&quot;lady&quot;</span>, <span class="st">&quot;ring&quot;</span>, <span class="st">&quot;lebron&quot;</span>, ])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2329,7 +2326,7 @@ dtype: object</code></pre>
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:460}}" data-outputid="f519e18b-873b-4b98-a9bd-c13a6029b3a2" data-execution_count="13">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:460}}" data-outputid="f519e18b-873b-4b98-a9bd-c13a6029b3a2" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Will work if your function is vectorized!</span></span>
@@ -2354,9 +2351,7 @@ Name: Gift.Item, dtype: object</code></pre>
 </section>
 <section id="function-2-and-unit-tests" class="level1">
 <h1>Function 2 and Unit Tests</h1>
-<div id="cell-10" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Code</summary>
+<div id="cell-10" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_phrase(num, num_word, item, verb, adjective, location):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   <span class="co">&quot;&quot;&quot;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">   Returns a phrase for a day of Christmas</span></span>
@@ -2419,9 +2414,8 @@ Name: Gift.Item, dtype: object</code></pre>
 <span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>   phrase <span class="op">=</span> phrase.<span class="bu">str</span>.replace(<span class="vs">r&quot;</span><span class="dv">\s</span><span class="op">+</span><span class="vs">&quot;</span>, <span class="st">&quot; &quot;</span>, regex<span class="op">=</span><span class="va">True</span>).<span class="bu">str</span>.strip()</span>
 <span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> phrase</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<div id="cell-11" class="cell" data-execution_count="15">
+<div id="cell-11" class="cell" data-execution_count="57">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapping words to ensure our phrasing is correct and says two not second</span></span>
@@ -2435,7 +2429,7 @@ Name: Gift.Item, dtype: object</code></pre>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>xmas2[<span class="st">&quot;Day_in_words&quot;</span>] <span class="op">=</span> xmas2[<span class="st">&quot;Day&quot;</span>].<span class="bu">map</span>(mapping_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="b275cbe1-1a28-4e51-acd4-5eaf71ea175e" data-execution_count="16">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="b275cbe1-1a28-4e51-acd4-5eaf71ea175e" data-execution_count="58">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the extra column with the full phrase to our xmas dataframe to get ready for the final step</span></span>
@@ -2606,7 +2600,7 @@ Name: Gift.Item, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="63cb6992-14be-401a-bf6f-fcd0e6bf1f56" data-execution_count="17">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="63cb6992-14be-401a-bf6f-fcd0e6bf1f56" data-execution_count="59">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding the extra column with full phrase to our xmas2 dataframe to get ready for the final step</span></span>
@@ -2777,7 +2771,7 @@ Name: Gift.Item, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:178}}" data-outputid="c2b7ac21-bc32-477f-ab72-2f1ed5f688e0" data-execution_count="18">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:178}}" data-outputid="c2b7ac21-bc32-477f-ab72-2f1ed5f688e0" data-execution_count="60">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asked chat to create a mock data unit test</span></span>
@@ -2800,7 +2794,7 @@ Name: Gift.Item, dtype: object</code></pre>
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="87331458-25d9-4947-b74b-8f00b2923046" data-execution_count="19">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="87331458-25d9-4947-b74b-8f00b2923046" data-execution_count="61">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas dataset</span></span>
@@ -2885,7 +2879,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="9dab22de-5711-475a-8acf-ea51df467354" data-execution_count="20">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:425}}" data-outputid="9dab22de-5711-475a-8acf-ea51df467354" data-execution_count="62">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing to see if it works on the xmas2 dataset</span></span>
@@ -2973,9 +2967,7 @@ dtype: object</code></pre>
 </section>
 <section id="function-3-and-final-output" class="level1">
 <h1>Function 3 and Final output</h1>
-<div id="cell-18" class="cell" data-execution_count="21">
-<details class="code-fold">
-<summary>Code</summary>
+<div id="cell-18" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sing_day(dataset, num, phrase_col):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&quot;&quot;&quot;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns a string with a song for days of Christmas</span></span>
@@ -3023,12 +3015,237 @@ dtype: object</code></pre>
 <span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 4: Combine intro and verses , strip removes the whitespace or linebreaks at the end of the string. </span></span>
 <span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  song <span class="op">=</span> intro <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">+</span> gifts.strip()</span>
 <span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> song</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d22b7308-39d5-4130-d6f8-d0a2a544a646" data-execution_count="22">
+<div id="cell-19" class="cell" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> day <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(sing_day(xmas, day, <span class="st">&quot;Full.Phrase&quot;</span>))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Colab suggested the seperator between days to make it more readable.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;-&quot;</span> <span class="op">*</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>On the first day of Christmas, my true love sent to me:
+a partridge in a pear tree
+--------------------
+On the second day of Christmas, my true love sent to me:
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the third day of Christmas, my true love sent to me:
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the fourth day of Christmas, my true love sent to me:
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the fifth day of Christmas, my true love sent to me:
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the sixth day of Christmas, my true love sent to me:
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the seventh day of Christmas, my true love sent to me:
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the eighth day of Christmas, my true love sent to me:
+eight maids a-milking
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the ninth day of Christmas, my true love sent to me:
+nine ladies dancing
+eight maids a-milking
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the tenth day of Christmas, my true love sent to me:
+ten lords a-leaping
+nine ladies dancing
+eight maids a-milking
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the eleventh day of Christmas, my true love sent to me:
+eleven pipers piping
+ten lords a-leaping
+nine ladies dancing
+eight maids a-milking
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------
+On the twelfth day of Christmas, my true love sent to me:
+twelve drummers drumming
+eleven pipers piping
+ten lords a-leaping
+nine ladies dancing
+eight maids a-milking
+seven swans a-swimming
+six geese a-laying
+five golden rings
+four calling birds
+three french hens
+two turtle doves
+and a partridge in a pear tree.
+--------------------</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="65">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> day <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(sing_day(xmas2, day, <span class="st">&quot;Full.Phrase&quot;</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Colab suggested the seperator between days to make it more readable.</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;-&quot;</span> <span class="op">*</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>On the first day of Christmas, my true love sent to me:
+an email from Cal Poly
+--------------------
+On the second day of Christmas, my true love sent to me:
+two meal points
+and an email from Cal Poly.
+--------------------
+On the third day of Christmas, my true love sent to me:
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the fourth day of Christmas, my true love sent to me:
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the fifth day of Christmas, my true love sent to me:
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the sixth day of Christmas, my true love sent to me:
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the seventh day of Christmas, my true love sent to me:
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the eighth day of Christmas, my true love sent to me:
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the ninth day of Christmas, my true love sent to me:
+nine parties bumping
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the tenth day of Christmas, my true love sent to me:
+ten loads of laundry
+nine parties bumping
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the eleventh day of Christmas, my true love sent to me:
+eleven friends goodbye-ing
+ten loads of laundry
+nine parties bumping
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------
+On the twelfth day of Christmas, my true love sent to me:
+twelve hours sleeping
+eleven friends goodbye-ing
+ten loads of laundry
+nine parties bumping
+eight moms a-calling
+seven seniors stressing
+six graders grading
+five practice exams
+four course reviews
+three lost pens
+two meal points
+and an email from Cal Poly.
+--------------------</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d22b7308-39d5-4130-d6f8-d0a2a544a646" data-execution_count="66">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the twelfth day of Christmas, my true love sent to me:
@@ -3046,10 +3263,10 @@ two turtle doves
 and a partridge in a pear tree.</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="23">
+<div id="cell-22" class="cell" data-execution_count="67">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">12</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the twelfth day of Christmas, my true love sent to me:
@@ -3067,10 +3284,10 @@ two meal points
 and an email from Cal Poly.</code></pre>
 </div>
 </div>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cee70a3a-edf5-47fa-d68c-6711bb9929f9" data-execution_count="24">
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cee70a3a-edf5-47fa-d68c-6711bb9929f9" data-execution_count="68">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">8</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas2, <span class="dv">8</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the eighth day of Christmas, my true love sent to me:
@@ -3084,10 +3301,10 @@ two meal points
 and an email from Cal Poly.</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="929c23b8-e507-47b5-b321-95b9cad9f309" data-execution_count="25">
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="929c23b8-e507-47b5-b321-95b9cad9f309" data-execution_count="69">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">1</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sing_day(xmas, <span class="dv">1</span>, <span class="st">&quot;Full.Phrase&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>On the first day of Christmas, my true love sent to me:
