@@ -180,6 +180,7 @@ def match_recipe(recipe_name):
         A pandas DataFrame with the following columns:
         - Recipe: The original recipe name from the meal plan.
         - Tasty Match: The closest matching recipe title(s) found via the Tasty API.
+        - Calories: reported calorie count form tasty.
     """
     url = "https://tasty.p.rapidapi.com/recipes/list"
     querystring = {"from": "0", "size": "100", "q": recipe_name}
@@ -193,10 +194,10 @@ def match_recipe(recipe_name):
     data = response.json()
 
     if "results" not in data or len(data["results"]) == 0:
-        return pd.DataFrame(columns=["Recipe", "Tasty Match"])
+        return pd.DataFrame(columns=["Recipe", "Tasty Match","Calories"])
 
-    matches = pd.json_normalize(data, "results")[["name"]]
-    matches = matches.rename(columns={"name": "Tasty Match"})
+    matches = pd.json_normalize(data, "results")[["name","nutrition.calories"]]
+    matches = matches.rename(columns={"name": "Tasty Match","nutrition.calories":"Calories"})
     matches.insert(0, "Recipe", recipe_name)
     return matches
 
@@ -278,35 +279,44 @@ df
 
 # 5. Analyze
 ```{python}
+
+# Creating a new dataset that calculates the mean calories per day and vegetarian status
+avg_calories = (
+    df.groupby(["Day", "Vegetarian"], as_index=False)["Calories"]
+      .mean()
+)
+
 import plotnine as p9
+import pandas as pd
 
 # used chat to order the days because my initial created plot had friday as the first day on the x axis
 day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-df["Day"] = pd.Categorical(df["Day"], categories=day_order, ordered=True)
+avg_calories["Day"] = pd.Categorical(avg_calories["Day"], categories=day_order, ordered=True)
 
 # Created a ggplot
 (
-    # used day as my x axis in the aesthetics and filled with the vegetarian column
-    p9.ggplot(df, p9.aes(x="Day", fill="Vegetarian"))
+    # used day for my x axis, average calories for y, and filled by vegetarian status
+    p9.ggplot(avg_calories, p9.aes(x="Day", y="Calories", fill="Vegetarian"))
     
-    # geom_bar counts the number of recipes per category and plots and chat suggested I add position = dodge
-    + p9.geom_bar(position="dodge")
+    # geom_col creates a normal bar chart showing the mean calorie values we calculated
+    + p9.geom_col(position="dodge")
     
-    # Asked chat to assign distinct colors to the vegetarian and not vegetarian bars
+    # asked chat to color the vegetarian bars green and the not vegetarian ones red
     + p9.scale_fill_manual(values={"Vegetarian": "seagreen", "Not Vegetarian": "firebrick"})
     
-    # Adding labels
+    # added a descriptive title and axis labels for clarity
     + p9.labs(
-        title="Meal Plan 202 – Number of Tasty Recipe Matches Per Day",
+        title="Meal Plan 202 – Average Calories Per Day by Meal Type",
         x="Day of the Week",
-        y="Number of Matching Recipes",
+        y="Average Calories per Recipe",
         fill="Meal Type"
     )
     
-    # Apply clean theme and rotate x-axis labels
+    # used a clean black and white theme and rotated x-axis labels for readability
     + p9.theme_bw()
+    + p9.theme(axis_text_x=p9.element_text(rotation=25, hjust=1))
 )
 
 ```
 
-As we can see from our visualization, there are a couple of findings. One is that we find more recipes that are vegetarian than not-vegetarian and that's true for each day. This may be more of a red flag for our dataset as some of our recipes should indeed be non-vegetarian heavy, but our tasty matches do not specifically include the meat keyword so it shows up as a non-vegetarian option in our dataset. Otherwise, we can see that we had the most matches for Thursday of all the days and we didn't find any matches for Monday. 
+As we can see from our visualization, there are a couple of findings. One is that we find the vegetarian recipes on wednesdays to have higher calorie counts on average than recipes that are non-vegetarian. However, our data may have some red flags, beause our dataset has recipes that should indeed be non-vegetarian heavy, but our tasty matches do not specifically include the meat keyword so it shows up as a non-vegetarian option in our dataset. Otherwise, other findings we get from the visualization is that tuesday's beef noodle soup is the highest average calorie for both vegetarian and non-vegetarian options and that our Monday, chicken divian, was not found anymore with our Tasty API.
