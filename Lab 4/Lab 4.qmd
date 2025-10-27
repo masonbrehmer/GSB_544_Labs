@@ -1,0 +1,218 @@
+---
+title: Lab 3 - Mason Brehmer
+echo: true
+format: 
+  html: 
+    embed-resources: true
+    code-fold: true
+    toc: true
+
+---
+[View the GitHub Repository](https://github.com/masonbrehmer/GSB_544_Labs/tree/main)
+
+```{python}
+ # pip install beautifulsoup4
+```
+
+```{python}
+#import pandas as pd
+```
+
+```{python}
+from bs4 import BeautifulSoup
+import pandas as pd
+import requests
+
+# I was getting an error when trying to just load in the html regularly that it was blocked.
+# My friend’s version used a User-Agent header to look like a real browser request.
+# This method allows us to directly access the live website without saving the HTML manually.
+
+# Request the webpage using a browser-like header
+url = "https://tastesbetterfromscratch.com/meal-plan-193/"
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+
+# Send the request
+req = requests.Session()
+response = req.get(url, headers=headers)
+
+# Parse the HTML and extract meal plan data and convert the HTML into a BeautifulSoup object that we can search through
+soup = BeautifulSoup(response.content, "html.parser")
+
+# Initialize an empty list to store each row of data
+rows = []
+
+# Iterate over all <p> tags that contain the meal information
+for meal in soup.find_all("p", class_="has-text-align-left"):
+
+    # Finding the day of the week which is inside strong
+    day_tag = meal.find("strong")
+    day = day_tag.get_text(strip=True).replace(":", "") if day_tag else None
+
+    # Finding the name of the recipe inside a
+    recipe_tag = meal.find("a")
+    recipe_name = recipe_tag.get_text(strip=True) if recipe_tag else None
+
+    # Finding the recipe link which comes from the href attribute of a
+    recipe_link = recipe_tag["href"] if recipe_tag else None
+
+    # Finding the price which is text that starts with $
+    text = meal.get_text(" ", strip=True)
+    price = next((w for w in text.split() if w.startswith("$")), None)
+
+    # Appending rows that have all the fields we want to create our dataframe
+    if all([day, recipe_name, recipe_link, price]):
+        rows.append({
+            "Day": day,
+            "Recipe": recipe_name,
+            "Link": recipe_link,
+            "Price": price
+        })
+
+# Converting the list of recipe items into a pandas DataFrame
+pd.DataFrame(rows)
+
+```
+
+
+```{python}
+import requests
+import pandas as pd
+
+# Step 1: Call the Tasty API for "Biscuit Chicken Pot Pie"
+url = "https://tasty.p.rapidapi.com/recipes/list"
+querystring = {"from": "0", "size": "100", "q": "Biscuit Chicken Pot Pie"}
+
+headers = {
+    "x-rapidapi-key": "c1a932b99bmshb161ad7371d8828p19c9a8jsnb1743d782984",
+    "x-rapidapi-host": "tasty.p.rapidapi.com"
+}
+
+response = requests.get(url, headers=headers, params=querystring)
+data = response.json()
+
+# Step 2: Flatten the JSON into a DataFrame
+BCPP_recipes = pd.json_normalize(data, "results")
+
+# Step 3: Display only the recipe names
+BCPP_recipes[["name"]].rename(columns={"name": "Recipe Name"})
+
+```
+
+```{python}
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import time
+
+# -----------------------------
+# Helper function 1: get_weekly_plan
+# -----------------------------
+def get_weekly_plan(plan_number):
+    """
+    Given a weekly meal plan number (100–210),
+    scrape the meal plan page from tastesbetterfromscratch.com
+    and return a DataFrame with day, recipe, link, and price.
+    """
+
+    # Step 1: Set up URL and headers (to appear like a normal browser)
+    url = f"https://tastesbetterfromscratch.com/meal-plan-{plan_number}/"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+
+    # Step 2: Request the page using a session
+    req = requests.Session()
+    response = req.get(url, headers=headers)
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Step 3: Extract meal info from <p> tags
+    rows = []
+
+    for meal in soup.find_all("p", class_="has-text-align-left"):
+        day_tag = meal.find("strong")
+        day = day_tag.get_text(strip=True).replace(":", "") if day_tag else None
+
+        recipe_tag = meal.find("a")
+        recipe_name = recipe_tag.get_text(strip=True) if recipe_tag else None
+        recipe_link = recipe_tag["href"] if recipe_tag else None
+
+        text = meal.get_text(" ", strip=True)
+        price = next((w for w in text.split() if w.startswith("$")), None)
+
+        if all([day, recipe_name]):
+            rows.append({
+                "Day": day,
+                "Recipe": recipe_name,
+                "Recipe Link": recipe_link,
+                "Price": price
+            })
+
+    return pd.DataFrame(rows)
+
+
+# -----------------------------
+# Helper function 2: match_recipe
+# -----------------------------
+def match_recipe(recipe_name):
+    """
+    Queries the Tasty API for a given recipe name.
+    Returns a DataFrame with matching recipe names (or empty if none found).
+    """
+    url = "https://tasty.p.rapidapi.com/recipes/list"
+    querystring = {"from": "0", "size": "20", "q": recipe_name}
+
+    headers = {
+        "x-rapidapi-key": "c1a932b99bmshb161ad7371d8828p19c9a8jsnb1743d782984",
+        "x-rapidapi-host": "tasty.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    data = response.json()
+
+    if "results" not in data or len(data["results"]) == 0:
+        return pd.DataFrame(columns=["Recipe", "Tasty Match"])
+
+    matches = pd.json_normalize(data, "results")[["name"]]
+    matches = matches.rename(columns={"name": "Tasty Match"})
+    matches.insert(0, "Recipe", recipe_name)
+    return matches
+
+
+# -----------------------------
+# Main function: get_mealplan_data
+# -----------------------------
+def get_mealplan_data(plan_number):
+    """
+    Scrapes a specific weekly meal plan and queries the Tasty API
+    for each recipe. Returns one combined DataFrame.
+    """
+    print(f"Scraping Meal Plan {plan_number}...")
+
+    # Step 1: Scrape the weekly plan (live)
+    meal_plan = get_weekly_plan(plan_number)
+    all_matches = []
+
+    # Step 2: Loop through recipes and query the Tasty API
+    for recipe in meal_plan["Recipe"]:
+        print(f"Searching Tasty API for: {recipe}")
+        matches = match_recipe(recipe)
+        all_matches.append(matches)
+        time.sleep(1)  # avoid API rate limit
+
+    # Step 3: Combine everything into one dataset
+    tasty_results = pd.concat(all_matches, ignore_index=True)
+    final_df = pd.merge(meal_plan, tasty_results,
+                        on="Recipe", how="left")
+
+    return final_df
+
+
+# -----------------------------
+# Example usage
+# -----------------------------
+df = get_mealplan_data(202)
+df
+
+```
+```{python}
+table = 3
+print(table)
+```
