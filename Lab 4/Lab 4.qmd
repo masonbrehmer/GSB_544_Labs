@@ -1,5 +1,5 @@
 ---
-title: Lab 3 - Mason Brehmer
+title: Lab 4 - Mason Brehmer
 echo: true
 format: 
   html: 
@@ -10,6 +10,7 @@ format:
 ---
 [View the GitHub Repository](https://github.com/masonbrehmer/GSB_544_Labs/tree/main)
 
+# 1. Data from unstructured websites
 ```{python}
  # pip install beautifulsoup4
 ```
@@ -24,38 +25,37 @@ import pandas as pd
 import requests
 
 # I was getting an error when trying to just load in the html regularly that it was blocked.
-# My friend’s version used a User-Agent header to look like a real browser request.
+# Instead I used chat which said to do a version using User-Agent header to look like a real browser request.
 # This method allows us to directly access the live website without saving the HTML manually.
 
-# Request the webpage using a browser-like header
+# requesting the webpage
 url = "https://tastesbetterfromscratch.com/meal-plan-193/"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
-# Send the request
 req = requests.Session()
 response = req.get(url, headers=headers)
 
-# Parse the HTML and extract meal plan data and convert the HTML into a BeautifulSoup object that we can search through
+# Parsing the HTML and extract meal plan data and convert the HTML into a BeautifulSoup object that we can search through
 soup = BeautifulSoup(response.content, "html.parser")
 
-# Initialize an empty list to store each row of data
+# Initializing an empty list to store each row of data
 rows = []
 
-# Iterate over all <p> tags that contain the meal information
+# Iterating over all <p> tags that contain the meal information
 for meal in soup.find_all("p", class_="has-text-align-left"):
 
-    # Finding the day of the week which is inside strong
+    # Finding the day of the week which is inside strong tag
     day_tag = meal.find("strong")
     day = day_tag.get_text(strip=True).replace(":", "") if day_tag else None
 
-    # Finding the name of the recipe inside a
+    # Finding the name of the recipe inside a tag
     recipe_tag = meal.find("a")
     recipe_name = recipe_tag.get_text(strip=True) if recipe_tag else None
 
-    # Finding the recipe link which comes from the href attribute of a
+    # Finding the recipe link which comes from the href attribute of a 
     recipe_link = recipe_tag["href"] if recipe_tag else None
 
-    # Finding the price which is text that starts with $
+    # Finding the price which is text that starts with $ 
     text = meal.get_text(" ", strip=True)
     price = next((w for w in text.split() if w.startswith("$")), None)
 
@@ -73,12 +73,12 @@ pd.DataFrame(rows)
 
 ```
 
-
+# 2. Data from an API
 ```{python}
 import requests
 import pandas as pd
 
-# Step 1: Call the Tasty API for "Biscuit Chicken Pot Pie"
+# Calling the tasty api for biscuit chicken pot pie
 url = "https://tasty.p.rapidapi.com/recipes/list"
 querystring = {"from": "0", "size": "100", "q": "Biscuit Chicken Pot Pie"}
 
@@ -90,42 +90,53 @@ headers = {
 response = requests.get(url, headers=headers, params=querystring)
 data = response.json()
 
-# Step 2: Flatten the JSON into a DataFrame
+# using the normalize function form json like we did in the class data
 BCPP_recipes = pd.json_normalize(data, "results")
 
-# Step 3: Display only the recipe names
+# displaying a table with only the recipe names
 BCPP_recipes[["name"]].rename(columns={"name": "Recipe Name"})
 
 ```
 
+# 3. Automate it
 ```{python}
-import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import requests
 import time
 
-# -----------------------------
-# Helper function 1: get_weekly_plan
-# -----------------------------
+# made the get_weekly_plan function like the lab said to help myself
 def get_weekly_plan(plan_number):
+# After creating the functions I asked chat to put well-formatted understandable documentation with each function
     """
-    Given a weekly meal plan number (100–210),
-    scrape the meal plan page from tastesbetterfromscratch.com
-    and return a DataFrame with day, recipe, link, and price.
-    """
+    Scrapes a weekly meal plan from the 'Tastes Better From Scratch' website.
 
-    # Step 1: Set up URL and headers (to appear like a normal browser)
+    Requests the HTML for a given meal plan number (e.g., 193), parses the structure,
+    and extracts the day, recipe name, recipe link, and price for each meal. 
+    Returns a formatted DataFrame containing the weekly plan.
+
+    Parameters
+    ----------
+    plan_number : int
+        The meal plan number (typically between 100 and 210) used to build the URL.
+
+    Returns
+    -------
+    DataFrame
+        A pandas DataFrame with columns:
+        - Day: Day of the week (e.g., Monday, Tuesday)
+        - Recipe: Name of the recipe
+        - Recipe Link: URL to the recipe page
+        - Price: Listed price for the recipe
+    """
     url = f"https://tastesbetterfromscratch.com/meal-plan-{plan_number}/"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
-    # Step 2: Request the page using a session
     req = requests.Session()
     response = req.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # Step 3: Extract meal info from <p> tags
     rows = []
-
     for meal in soup.find_all("p", class_="has-text-align-left"):
         day_tag = meal.find("strong")
         day = day_tag.get_text(strip=True).replace(":", "") if day_tag else None
@@ -148,16 +159,30 @@ def get_weekly_plan(plan_number):
     return pd.DataFrame(rows)
 
 
-# -----------------------------
-# Helper function 2: match_recipe
-# -----------------------------
+# Match_recipe function 
 def match_recipe(recipe_name):
+# After creating the functions I asked chat to put well-formatted understandable documentation with each function
     """
     Queries the Tasty API for a given recipe name.
-    Returns a DataFrame with matching recipe names (or empty if none found).
+
+    Sends a request to the Tasty API using the provided recipe name as a query
+    and retrieves up to three potential matches. Extracts the recipe titles and
+    returns them in a DataFrame.
+
+    Parameters
+    ----------
+    recipe_name : str
+        The name of the recipe to search for on the Tasty API.
+
+    Returns
+    -------
+    DataFrame
+        A pandas DataFrame with the following columns:
+        - Recipe: The original recipe name from the meal plan.
+        - Tasty Match: The closest matching recipe title(s) found via the Tasty API.
     """
     url = "https://tasty.p.rapidapi.com/recipes/list"
-    querystring = {"from": "0", "size": "20", "q": recipe_name}
+    querystring = {"from": "0", "size": "100", "q": recipe_name}
 
     headers = {
         "x-rapidapi-key": "c1a932b99bmshb161ad7371d8828p19c9a8jsnb1743d782984",
@@ -176,43 +201,112 @@ def match_recipe(recipe_name):
     return matches
 
 
-# -----------------------------
-# Main function: get_mealplan_data
-# -----------------------------
+# get_meal_plan main funciton
 def get_mealplan_data(plan_number):
+# After creating the functions I asked chat to put well-formatted understandable documentation with each function
     """
-    Scrapes a specific weekly meal plan and queries the Tasty API
-    for each recipe. Returns one combined DataFrame.
+    Combines meal plan scraping and Tasty API matching into one pipeline.
+
+    Scrapes the specified weekly meal plan from 'Tastes Better From Scratch'
+    and queries the Tasty API for each recipe listed. Merges both datasets 
+    to create a single combined DataFrame of all results.
+
+    Parameters
+    ----------
+    plan_number : int
+        The weekly meal plan number (e.g., 193, 202) to process.
+
+    Returns
+    -------
+    DataFrame
+        A combined pandas DataFrame that includes:
+        - Day: The day of the week
+        - Recipe: The original recipe name
+        - Recipe Link: The URL to the recipe
+        - Price: The meal price
+        - Tasty Match: The closest matching recipe from the Tasty API
     """
+    #Chat also suggested to have this printed so we know what meal plan we're scraping
     print(f"Scraping Meal Plan {plan_number}...")
 
-    # Step 1: Scrape the weekly plan (live)
+    # first we scrape the weekly meal plan
     meal_plan = get_weekly_plan(plan_number)
     all_matches = []
 
-    # Step 2: Loop through recipes and query the Tasty API
+    # Loop through recipes and query the API
     for recipe in meal_plan["Recipe"]:
+        #Chat suggested to add this print step to the for loop so we know what food is being searched for.
         print(f"Searching Tasty API for: {recipe}")
         matches = match_recipe(recipe)
         all_matches.append(matches)
-        time.sleep(1)  # avoid API rate limit
+        time.sleep(1)  # chat suggested this time.sleep to avoid the API rate limit
 
-    # Step 3: Combine everything into one dataset
+    #Combining it all into one pandas dataset
     tasty_results = pd.concat(all_matches, ignore_index=True)
     final_df = pd.merge(meal_plan, tasty_results,
                         on="Recipe", how="left")
 
     return final_df
 
+```
 
-# -----------------------------
-# Example usage
-# -----------------------------
+```{python}
+# Run it on the 202 data
 df = get_mealplan_data(202)
+
 df
 
 ```
+
+# 4. Add a column with fuzzy matching
 ```{python}
-table = 3
-print(table)
+# Used chat to make a list of common meat keywords
+meats = ["chicken", "beef", "pork", "ham", "bacon", "turkey", "salmon", 
+         "fish", "shrimp", "sausage", "steak", "tuna", "lamb"]
+
+# Added a column to the dataframe that checks if a meat word matches inside the tasty match column
+df["Vegetarian"] = df["Tasty Match"].str.lower().apply(
+    lambda name: not any(meat in name for meat in meats) if isinstance(name, str) else None
+)
+
+# Converted the boolean values which are 1 if the food is vegetarian and 0 if the food is not vegetarian and meat was found in the cell 
+df["Vegetarian"] = df["Vegetarian"].replace({True: "Vegetarian", False: "Not Vegetarian"})
+
+df
+
 ```
+
+# 5. Analyze
+```{python}
+import plotnine as p9
+
+# used chat to order the days because my initial created plot had friday as the first day on the x axis
+day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+df["Day"] = pd.Categorical(df["Day"], categories=day_order, ordered=True)
+
+# Created a ggplot
+(
+    # used day as my x axis in the aesthetics and filled with the vegetarian column
+    p9.ggplot(df, p9.aes(x="Day", fill="Vegetarian"))
+    
+    # geom_bar counts the number of recipes per category and plots and chat suggested I add position = dodge
+    + p9.geom_bar(position="dodge")
+    
+    # Asked chat to assign distinct colors to the vegetarian and not vegetarian bars
+    + p9.scale_fill_manual(values={"Vegetarian": "seagreen", "Not Vegetarian": "firebrick"})
+    
+    # Adding labels
+    + p9.labs(
+        title="Meal Plan 202 – Number of Tasty Recipe Matches Per Day",
+        x="Day of the Week",
+        y="Number of Matching Recipes",
+        fill="Meal Type"
+    )
+    
+    # Apply clean theme and rotate x-axis labels
+    + p9.theme_bw()
+)
+
+```
+
+As we can see from our visualization, there are a couple of findings. One is that we find more recipes that are vegetarian than not-vegetarian and that's true for each day. This may be more of a red flag for our dataset as some of our recipes should indeed be non-vegetarian heavy, but our tasty matches do not specifically include the meat keyword so it shows up as a non-vegetarian option in our dataset. Otherwise, we can see that we had the most matches for Thursday of all the days and we didn't find any matches for Monday. 

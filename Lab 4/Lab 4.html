@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 3 - Mason Brehmer</title>
+<title>Lab 4 - Mason Brehmer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2178,14 +2178,24 @@ vertical-align: -.125em;
 <body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-  
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-from-unstructured-websites" id="toc-data-from-unstructured-websites" class="nav-link active" data-scroll-target="#data-from-unstructured-websites">1. Data from unstructured websites</a></li>
+  <li><a href="#data-from-an-api" id="toc-data-from-an-api" class="nav-link" data-scroll-target="#data-from-an-api">2. Data from an API</a></li>
+  <li><a href="#automate-it" id="toc-automate-it" class="nav-link" data-scroll-target="#automate-it">3. Automate it</a></li>
+  <li><a href="#add-a-column-with-fuzzy-matching" id="toc-add-a-column-with-fuzzy-matching" class="nav-link" data-scroll-target="#add-a-column-with-fuzzy-matching">4. Add a column with fuzzy matching</a></li>
+  <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">5. Analyze</a></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 3 - Mason Brehmer</h1>
+<h1 class="title">Lab 4 - Mason Brehmer</h1>
 </div>
 
 
@@ -2203,19 +2213,21 @@ vertical-align: -.125em;
 
 
 <p><a href="https://github.com/masonbrehmer/GSB_544_Labs/tree/main">View the GitHub Repository</a></p>
-<div id="7ccf47d9" class="cell" data-execution_count="1">
+<section id="data-from-unstructured-websites" class="level1">
+<h1>1. Data from unstructured websites</h1>
+<div id="0bbb940b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># pip install beautifulsoup4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="342894df" class="cell" data-execution_count="2">
+<div id="5b824313" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import pandas as pd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5968d146" class="cell" data-execution_count="3">
+<div id="eb5f93ae" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
@@ -2223,52 +2235,51 @@ vertical-align: -.125em;
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I was getting an error when trying to just load in the html regularly that it was blocked.</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># My friend’s version used a User-Agent header to look like a real browser request.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead I used chat which said to do a version using User-Agent header to look like a real browser request.</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This method allows us to directly access the live website without saving the HTML manually.</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Request the webpage using a browser-like header</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># requesting the webpage</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&quot;https://tastesbetterfromscratch.com/meal-plan-193/&quot;</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {<span class="st">&quot;User-Agent&quot;</span>: <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;</span>}</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Send the request</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>req <span class="op">=</span> requests.Session()</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> req.get(url, headers<span class="op">=</span>headers)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the HTML and extract meal plan data and convert the HTML into a BeautifulSoup object that we can search through</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">&quot;html.parser&quot;</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty list to store each row of data</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over all &lt;p&gt; tags that contain the meal information</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> meal <span class="kw">in</span> soup.find_all(<span class="st">&quot;p&quot;</span>, class_<span class="op">=</span><span class="st">&quot;has-text-align-left&quot;</span>):</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the day of the week which is inside strong</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    day_tag <span class="op">=</span> meal.find(<span class="st">&quot;strong&quot;</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    day <span class="op">=</span> day_tag.get_text(strip<span class="op">=</span><span class="va">True</span>).replace(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="cf">if</span> day_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the name of the recipe inside a</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    recipe_tag <span class="op">=</span> meal.find(<span class="st">&quot;a&quot;</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    recipe_name <span class="op">=</span> recipe_tag.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the recipe link which comes from the href attribute of a</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    recipe_link <span class="op">=</span> recipe_tag[<span class="st">&quot;href&quot;</span>] <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the price which is text that starts with $</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> meal.get_text(<span class="st">&quot; &quot;</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="bu">next</span>((w <span class="cf">for</span> w <span class="kw">in</span> text.split() <span class="cf">if</span> w.startswith(<span class="st">&quot;$&quot;</span>)), <span class="va">None</span>)</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Appending rows that have all the fields we want to create our dataframe</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">all</span>([day, recipe_name, recipe_link, price]):</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        rows.append({</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Day&quot;</span>: day,</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Recipe&quot;</span>: recipe_name,</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Link&quot;</span>: recipe_link,</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Price&quot;</span>: price</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the list of recipe items into a pandas DataFrame</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>req <span class="op">=</span> requests.Session()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> req.get(url, headers<span class="op">=</span>headers)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Parsing the HTML and extract meal plan data and convert the HTML into a BeautifulSoup object that we can search through</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">&quot;html.parser&quot;</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Initializing an empty list to store each row of data</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterating over all &lt;p&gt; tags that contain the meal information</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> meal <span class="kw">in</span> soup.find_all(<span class="st">&quot;p&quot;</span>, class_<span class="op">=</span><span class="st">&quot;has-text-align-left&quot;</span>):</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the day of the week which is inside strong tag</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    day_tag <span class="op">=</span> meal.find(<span class="st">&quot;strong&quot;</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    day <span class="op">=</span> day_tag.get_text(strip<span class="op">=</span><span class="va">True</span>).replace(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="cf">if</span> day_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the name of the recipe inside a tag</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    recipe_tag <span class="op">=</span> meal.find(<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    recipe_name <span class="op">=</span> recipe_tag.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the recipe link which comes from the href attribute of a </span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    recipe_link <span class="op">=</span> recipe_tag[<span class="st">&quot;href&quot;</span>] <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Finding the price which is text that starts with $ </span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> meal.get_text(<span class="st">&quot; &quot;</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="bu">next</span>((w <span class="cf">for</span> w <span class="kw">in</span> text.split() <span class="cf">if</span> w.startswith(<span class="st">&quot;$&quot;</span>)), <span class="va">None</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Appending rows that have all the fields we want to create our dataframe</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">all</span>([day, recipe_name, recipe_link, price]):</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        rows.append({</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Day&quot;</span>: day,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Recipe&quot;</span>: recipe_name,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Link&quot;</span>: recipe_link,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Price&quot;</span>: price</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the list of recipe items into a pandas DataFrame</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -2326,13 +2337,16 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<div id="078e3ffc" class="cell" data-execution_count="4">
+</section>
+<section id="data-from-an-api" class="level1">
+<h1>2. Data from an API</h1>
+<div id="2960d3d6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Call the Tasty API for &quot;Biscuit Chicken Pot Pie&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling the tasty api for biscuit chicken pot pie</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&quot;https://tasty.p.rapidapi.com/recipes/list&quot;</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>querystring <span class="op">=</span> {<span class="st">&quot;from&quot;</span>: <span class="st">&quot;0&quot;</span>, <span class="st">&quot;size&quot;</span>: <span class="st">&quot;100&quot;</span>, <span class="st">&quot;q&quot;</span>: <span class="st">&quot;Biscuit Chicken Pot Pie&quot;</span>}</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -2344,10 +2358,10 @@ vertical-align: -.125em;
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers, params<span class="op">=</span>querystring)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Flatten the JSON into a DataFrame</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># using the normalize function form json like we did in the class data</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>BCPP_recipes <span class="op">=</span> pd.json_normalize(data, <span class="st">&quot;results&quot;</span>)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Display only the recipe names</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># displaying a table with only the recipe names</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>BCPP_recipes[[<span class="st">&quot;name&quot;</span>]].rename(columns<span class="op">=</span>{<span class="st">&quot;name&quot;</span>: <span class="st">&quot;Recipe Name&quot;</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -2396,130 +2410,178 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<div id="3da34cf1" class="cell" data-execution_count="5">
+</section>
+<section id="automate-it" class="level1">
+<h1>3. Automate it</h1>
+<div id="8fbacf08" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper function 1: get_weekly_plan</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_weekly_plan(plan_number):</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Given a weekly meal plan number (100–210),</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    scrape the meal plan page from tastesbetterfromscratch.com</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    and return a DataFrame with day, recipe, link, and price.</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># made the get_weekly_plan function like the lab said to help myself</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_weekly_plan(plan_number):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After creating the functions I asked chat to put well-formatted understandable documentation with each function</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Scrapes a weekly meal plan from the &#39;Tastes Better From Scratch&#39; website.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Requests the HTML for a given meal plan number (e.g., 193), parses the structure,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    and extracts the day, recipe name, recipe link, and price for each meal. </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns a formatted DataFrame containing the weekly plan.</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 1: Set up URL and headers (to appear like a normal browser)</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f&quot;https://tastesbetterfromscratch.com/meal-plan-</span><span class="sc">{</span>plan_number<span class="sc">}</span><span class="ss">/&quot;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {<span class="st">&quot;User-Agent&quot;</span>: <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;</span>}</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 2: Request the page using a session</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    req <span class="op">=</span> requests.Session()</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> req.get(url, headers<span class="op">=</span>headers)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">&quot;html.parser&quot;</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 3: Extract meal info from &lt;p&gt; tags</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> meal <span class="kw">in</span> soup.find_all(<span class="st">&quot;p&quot;</span>, class_<span class="op">=</span><span class="st">&quot;has-text-align-left&quot;</span>):</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        day_tag <span class="op">=</span> meal.find(<span class="st">&quot;strong&quot;</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        day <span class="op">=</span> day_tag.get_text(strip<span class="op">=</span><span class="va">True</span>).replace(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="cf">if</span> day_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        recipe_tag <span class="op">=</span> meal.find(<span class="st">&quot;a&quot;</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        recipe_name <span class="op">=</span> recipe_tag.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        recipe_link <span class="op">=</span> recipe_tag[<span class="st">&quot;href&quot;</span>] <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> meal.get_text(<span class="st">&quot; &quot;</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="bu">next</span>((w <span class="cf">for</span> w <span class="kw">in</span> text.split() <span class="cf">if</span> w.startswith(<span class="st">&quot;$&quot;</span>)), <span class="va">None</span>)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">all</span>([day, recipe_name]):</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>            rows.append({</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Day&quot;</span>: day,</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Recipe&quot;</span>: recipe_name,</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Recipe Link&quot;</span>: recipe_link,</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Price&quot;</span>: price</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>            })</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">    plan_number : int</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">        The meal plan number (typically between 100 and 210) used to build the URL.</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">    DataFrame</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">        A pandas DataFrame with columns:</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">        - Day: Day of the week (e.g., Monday, Tuesday)</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">        - Recipe: Name of the recipe</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">        - Recipe Link: URL to the recipe page</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">        - Price: Listed price for the recipe</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f&quot;https://tastesbetterfromscratch.com/meal-plan-</span><span class="sc">{</span>plan_number<span class="sc">}</span><span class="ss">/&quot;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {<span class="st">&quot;User-Agent&quot;</span>: <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;</span>}</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    req <span class="op">=</span> requests.Session()</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> req.get(url, headers<span class="op">=</span>headers)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">&quot;html.parser&quot;</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> meal <span class="kw">in</span> soup.find_all(<span class="st">&quot;p&quot;</span>, class_<span class="op">=</span><span class="st">&quot;has-text-align-left&quot;</span>):</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        day_tag <span class="op">=</span> meal.find(<span class="st">&quot;strong&quot;</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        day <span class="op">=</span> day_tag.get_text(strip<span class="op">=</span><span class="va">True</span>).replace(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="cf">if</span> day_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        recipe_tag <span class="op">=</span> meal.find(<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        recipe_name <span class="op">=</span> recipe_tag.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        recipe_link <span class="op">=</span> recipe_tag[<span class="st">&quot;href&quot;</span>] <span class="cf">if</span> recipe_tag <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> meal.get_text(<span class="st">&quot; &quot;</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="bu">next</span>((w <span class="cf">for</span> w <span class="kw">in</span> text.split() <span class="cf">if</span> w.startswith(<span class="st">&quot;$&quot;</span>)), <span class="va">None</span>)</span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper function 2: match_recipe</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_recipe(recipe_name):</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co">    Queries the Tasty API for a given recipe name.</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns a DataFrame with matching recipe names (or empty if none found).</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="st">&quot;https://tasty.p.rapidapi.com/recipes/list&quot;</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    querystring <span class="op">=</span> {<span class="st">&quot;from&quot;</span>: <span class="st">&quot;0&quot;</span>, <span class="st">&quot;size&quot;</span>: <span class="st">&quot;3&quot;</span>, <span class="st">&quot;q&quot;</span>: recipe_name}</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;x-rapidapi-key&quot;</span>: <span class="st">&quot;c1a932b99bmshb161ad7371d8828p19c9a8jsnb1743d782984&quot;</span>,</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;x-rapidapi-host&quot;</span>: <span class="st">&quot;tasty.p.rapidapi.com&quot;</span></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">all</span>([day, recipe_name]):</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>            rows.append({</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Day&quot;</span>: day,</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Recipe&quot;</span>: recipe_name,</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Recipe Link&quot;</span>: recipe_link,</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Price&quot;</span>: price</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows)</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Match_recipe function </span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_recipe(recipe_name):</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="co"># After creating the functions I asked chat to put well-formatted understandable documentation with each function</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co">    Queries the Tasty API for a given recipe name.</span></span>
 <span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers, params<span class="op">=</span>querystring)</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;results&quot;</span> <span class="kw">not</span> <span class="kw">in</span> data <span class="kw">or</span> <span class="bu">len</span>(data[<span class="st">&quot;results&quot;</span>]) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&quot;Recipe&quot;</span>, <span class="st">&quot;Tasty Match&quot;</span>])</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    matches <span class="op">=</span> pd.json_normalize(data, <span class="st">&quot;results&quot;</span>)[[<span class="st">&quot;name&quot;</span>]]</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    matches <span class="op">=</span> matches.rename(columns<span class="op">=</span>{<span class="st">&quot;name&quot;</span>: <span class="st">&quot;Tasty Match&quot;</span>})</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    matches.insert(<span class="dv">0</span>, <span class="st">&quot;Recipe&quot;</span>, recipe_name)</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> matches</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Main function: get_mealplan_data</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_mealplan_data(plan_number):</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="co">    Scrapes a specific weekly meal plan and queries the Tasty API</span></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co">    for each recipe. Returns one combined DataFrame.</span></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Scraping Meal Plan </span><span class="sc">{</span>plan_number<span class="sc">}</span><span class="ss">...&quot;</span>)</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 1: Scrape the weekly plan (live)</span></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    meal_plan <span class="op">=</span> get_weekly_plan(plan_number)</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>    all_matches <span class="op">=</span> []</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 2: Loop through recipes and query the Tasty API</span></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> recipe <span class="kw">in</span> meal_plan[<span class="st">&quot;Recipe&quot;</span>]:</span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Searching Tasty API for: </span><span class="sc">{</span>recipe<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>        matches <span class="op">=</span> match_recipe(recipe)</span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>        all_matches.append(matches)</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">1</span>)  <span class="co"># avoid API rate limit</span></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 3: Combine everything into one dataset</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>    tasty_results <span class="op">=</span> pd.concat(all_matches, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>    final_df <span class="op">=</span> pd.merge(meal_plan, tasty_results,</span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>                        on<span class="op">=</span><span class="st">&quot;Recipe&quot;</span>, how<span class="op">=</span><span class="st">&quot;left&quot;</span>)</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> final_df</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> get_mealplan_data(<span class="dv">191</span>)</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="co">    Sends a request to the Tasty API using the provided recipe name as a query</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="co">    and retrieves up to three potential matches. Extracts the recipe titles and</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co">    returns them in a DataFrame.</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="co">    recipe_name : str</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="co">        The name of the recipe to search for on the Tasty API.</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="co">    DataFrame</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="co">        A pandas DataFrame with the following columns:</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="co">        - Recipe: The original recipe name from the meal plan.</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="co">        - Tasty Match: The closest matching recipe title(s) found via the Tasty API.</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="st">&quot;https://tasty.p.rapidapi.com/recipes/list&quot;</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    querystring <span class="op">=</span> {<span class="st">&quot;from&quot;</span>: <span class="st">&quot;0&quot;</span>, <span class="st">&quot;size&quot;</span>: <span class="st">&quot;100&quot;</span>, <span class="st">&quot;q&quot;</span>: recipe_name}</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;x-rapidapi-key&quot;</span>: <span class="st">&quot;c1a932b99bmshb161ad7371d8828p19c9a8jsnb1743d782984&quot;</span>,</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;x-rapidapi-host&quot;</span>: <span class="st">&quot;tasty.p.rapidapi.com&quot;</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers, params<span class="op">=</span>querystring)</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;results&quot;</span> <span class="kw">not</span> <span class="kw">in</span> data <span class="kw">or</span> <span class="bu">len</span>(data[<span class="st">&quot;results&quot;</span>]) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&quot;Recipe&quot;</span>, <span class="st">&quot;Tasty Match&quot;</span>])</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>    matches <span class="op">=</span> pd.json_normalize(data, <span class="st">&quot;results&quot;</span>)[[<span class="st">&quot;name&quot;</span>]]</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    matches <span class="op">=</span> matches.rename(columns<span class="op">=</span>{<span class="st">&quot;name&quot;</span>: <span class="st">&quot;Tasty Match&quot;</span>})</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    matches.insert(<span class="dv">0</span>, <span class="st">&quot;Recipe&quot;</span>, recipe_name)</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> matches</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="co"># get_meal_plan main funciton</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_mealplan_data(plan_number):</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="co"># After creating the functions I asked chat to put well-formatted understandable documentation with each function</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="co">    Combines meal plan scraping and Tasty API matching into one pipeline.</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="co">    Scrapes the specified weekly meal plan from &#39;Tastes Better From Scratch&#39;</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="co">    and queries the Tasty API for each recipe listed. Merges both datasets </span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a><span class="co">    to create a single combined DataFrame of all results.</span></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="co">    plan_number : int</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="co">        The weekly meal plan number (e.g., 193, 202) to process.</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a><span class="co">    DataFrame</span></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="co">        A combined pandas DataFrame that includes:</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="co">        - Day: The day of the week</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="co">        - Recipe: The original recipe name</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="co">        - Recipe Link: The URL to the recipe</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="co">        - Price: The meal price</span></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a><span class="co">        - Tasty Match: The closest matching recipe from the Tasty API</span></span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Chat also suggested to have this printed so we know what meal plan we&#39;re scraping</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Scraping Meal Plan </span><span class="sc">{</span>plan_number<span class="sc">}</span><span class="ss">...&quot;</span>)</span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first we scrape the weekly meal plan</span></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>    meal_plan <span class="op">=</span> get_weekly_plan(plan_number)</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>    all_matches <span class="op">=</span> []</span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop through recipes and query the API</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> recipe <span class="kw">in</span> meal_plan[<span class="st">&quot;Recipe&quot;</span>]:</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Chat suggested to add this print step to the for loop so we know what food is being searched for.</span></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Searching Tasty API for: </span><span class="sc">{</span>recipe<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>        matches <span class="op">=</span> match_recipe(recipe)</span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>        all_matches.append(matches)</span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">1</span>)  <span class="co"># chat suggested this time.sleep to avoid the API rate limit</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Combining it all into one pandas dataset</span></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>    tasty_results <span class="op">=</span> pd.concat(all_matches, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>    final_df <span class="op">=</span> pd.merge(meal_plan, tasty_results,</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>                        on<span class="op">=</span><span class="st">&quot;Recipe&quot;</span>, how<span class="op">=</span><span class="st">&quot;left&quot;</span>)</span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> final_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="691c11e9" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it on the 202 data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> get_mealplan_data(<span class="dv">202</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Scraping Meal Plan 191...
-Searching Tasty API for: Chicken Tinga
-Searching Tasty API for: BBQ Chicken Pizza
-Searching Tasty API for: Hamburger Gravy
-Searching Tasty API for: Manicotti
-Searching Tasty API for: Slow Cooker Ribs</code></pre>
+<pre><code>Scraping Meal Plan 202...
+Searching Tasty API for: Chicken Divan
+Searching Tasty API for: Beef Noodle Soup
+Searching Tasty API for: Stuffed Shells
+Searching Tasty API for: Vegetarian Stuffed Peppers
+Searching Tasty API for: Chicken Gyros</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -2538,123 +2600,286 @@ Searching Tasty API for: Slow Cooker Ribs</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>Monday</td>
-<td>Chicken Tinga</td>
-<td>https://tastesbetterfromscratch.com/chicken-ti...</td>
-<td>$10.22</td>
-<td>Chicken Tinga Tacos (Tinga De Pollo)</td>
+<td>Chicken Divan</td>
+<td>https://tastesbetterfromscratch.com/skinny-chi...</td>
+<td>$10.82</td>
+<td>NaN</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>Monday</td>
-<td>Chicken Tinga</td>
-<td>https://tastesbetterfromscratch.com/chicken-ti...</td>
-<td>$10.22</td>
-<td>Tostadas De Tinga</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Taiwanese Beef Noodle Soup</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>Monday</td>
-<td>Chicken Tinga</td>
-<td>https://tastesbetterfromscratch.com/chicken-ti...</td>
-<td>$10.22</td>
-<td>Tostadas De Tinga De Pollo</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Classic Lasagna Soup</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>Tuesday</td>
-<td>BBQ Chicken Pizza</td>
-<td>https://tastesbetterfromscratch.com/barbeque-c...</td>
-<td>$10.26</td>
-<td>BBQ Chicken Tortilla Pizzas</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Traditional Vietnamese Beef Pho</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>Tuesday</td>
-<td>BBQ Chicken Pizza</td>
-<td>https://tastesbetterfromscratch.com/barbeque-c...</td>
-<td>$10.26</td>
-<td>BBQ Chicken Pita Pizza</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>1-Day Noodles (Taiwanese Beef Noodle Soup)</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>Tuesday</td>
-<td>BBQ Chicken Pizza</td>
-<td>https://tastesbetterfromscratch.com/barbeque-c...</td>
-<td>$10.26</td>
-<td>BBQ Chicken Dippers</td>
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>Wednesday</td>
-<td>Hamburger Gravy</td>
-<td>https://tastesbetterfromscratch.com/hamburger-...</td>
-<td>$8.20</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>Thursday</td>
-<td>Manicotti</td>
-<td>https://tastesbetterfromscratch.com/manicotti/</td>
-<td>$17.63</td>
-<td>Spinach And Artichoke Chicken Stuffed Manicott...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>Thursday</td>
-<td>Manicotti</td>
-<td>https://tastesbetterfromscratch.com/manicotti/</td>
-<td>$17.63</td>
-<td>Alfredo Manicotti</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>Thursday</td>
-<td>Manicotti</td>
-<td>https://tastesbetterfromscratch.com/manicotti/</td>
-<td>$17.63</td>
-<td>Spinach And Cheese Manicotti</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
+<td data-quarto-table-cell-role="th">77</td>
 <td>Friday</td>
-<td>Slow Cooker Ribs</td>
-<td>https://tastesbetterfromscratch.com/slow-cooke...</td>
-<td>$24.42</td>
-<td>Slow Cooker Ribs</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>5 Fork-less Finger Foods</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
+<td data-quarto-table-cell-role="th">78</td>
 <td>Friday</td>
-<td>Slow Cooker Ribs</td>
-<td>https://tastesbetterfromscratch.com/slow-cooke...</td>
-<td>$24.42</td>
-<td>Slow Cooker BBQ Ribs</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Homemade American Street Foods</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
+<td data-quarto-table-cell-role="th">79</td>
 <td>Friday</td>
-<td>Slow Cooker Ribs</td>
-<td>https://tastesbetterfromscratch.com/slow-cooke...</td>
-<td>$24.42</td>
-<td>Slow-Cooker Pineapple Baby Back Ribs</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Chicken Recipes For The Whole Month</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Tasty Dinners for Every Night of December</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">81</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>11 Street Food Recipes You Can Make At Home</td>
 </tr>
 </tbody>
 </table>
 
+<p>82 rows × 5 columns</p>
 </div>
 </div>
 </div>
-<div id="2b5f7196" class="cell" data-execution_count="6">
+</section>
+<section id="add-a-column-with-fuzzy-matching" class="level1">
+<h1>4. Add a column with fuzzy matching</h1>
+<div id="2ee4c52d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Used chat to make a list of common meat keywords</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>meats <span class="op">=</span> [<span class="st">&quot;chicken&quot;</span>, <span class="st">&quot;beef&quot;</span>, <span class="st">&quot;pork&quot;</span>, <span class="st">&quot;ham&quot;</span>, <span class="st">&quot;bacon&quot;</span>, <span class="st">&quot;turkey&quot;</span>, <span class="st">&quot;salmon&quot;</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;fish&quot;</span>, <span class="st">&quot;shrimp&quot;</span>, <span class="st">&quot;sausage&quot;</span>, <span class="st">&quot;steak&quot;</span>, <span class="st">&quot;tuna&quot;</span>, <span class="st">&quot;lamb&quot;</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Added a column to the dataframe that checks if a meat word matches inside the tasty match column</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Vegetarian&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Tasty Match&quot;</span>].<span class="bu">str</span>.lower().<span class="bu">apply</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> name: <span class="kw">not</span> <span class="bu">any</span>(meat <span class="kw">in</span> name <span class="cf">for</span> meat <span class="kw">in</span> meats) <span class="cf">if</span> <span class="bu">isinstance</span>(name, <span class="bu">str</span>) <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Converted the boolean values which are 1 if the food is vegetarian and 0 if the food is not vegetarian and meat was found in the cell </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Vegetarian&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Vegetarian&quot;</span>].replace({<span class="va">True</span>: <span class="st">&quot;Vegetarian&quot;</span>, <span class="va">False</span>: <span class="st">&quot;Not Vegetarian&quot;</span>})</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>3</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Day</th>
+<th data-quarto-table-cell-role="th">Recipe</th>
+<th data-quarto-table-cell-role="th">Recipe Link</th>
+<th data-quarto-table-cell-role="th">Price</th>
+<th data-quarto-table-cell-role="th">Tasty Match</th>
+<th data-quarto-table-cell-role="th">Vegetarian</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Monday</td>
+<td>Chicken Divan</td>
+<td>https://tastesbetterfromscratch.com/skinny-chi...</td>
+<td>$10.82</td>
+<td>NaN</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Taiwanese Beef Noodle Soup</td>
+<td>Not Vegetarian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Classic Lasagna Soup</td>
+<td>Vegetarian</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>Traditional Vietnamese Beef Pho</td>
+<td>Not Vegetarian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Tuesday</td>
+<td>Beef Noodle Soup</td>
+<td>https://tastesbetterfromscratch.com/beef-noodl...</td>
+<td>$29.29</td>
+<td>1-Day Noodles (Taiwanese Beef Noodle Soup)</td>
+<td>Not Vegetarian</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">77</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>5 Fork-less Finger Foods</td>
+<td>Vegetarian</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">78</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Homemade American Street Foods</td>
+<td>Vegetarian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">79</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Chicken Recipes For The Whole Month</td>
+<td>Not Vegetarian</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>Tasty Dinners for Every Night of December</td>
+<td>Vegetarian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">81</td>
+<td>Friday</td>
+<td>Chicken Gyros</td>
+<td>https://tastesbetterfromscratch.com/chicken-gy...</td>
+<td>$21.22</td>
+<td>11 Street Food Recipes You Can Make At Home</td>
+<td>Vegetarian</td>
+</tr>
+</tbody>
+</table>
+
+<p>82 rows × 6 columns</p>
 </div>
 </div>
+</div>
+</section>
+<section id="analyze" class="level1">
+<h1>5. Analyze</h1>
+<div id="dab70346" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotnine <span class="im">as</span> p9</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># used chat to order the days because my initial created plot had friday as the first day on the x axis</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>day_order <span class="op">=</span> [<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Day&quot;</span>] <span class="op">=</span> pd.Categorical(df[<span class="st">&quot;Day&quot;</span>], categories<span class="op">=</span>day_order, ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Created a ggplot</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># used day as my x axis in the aesthetics and filled with the vegetarian column</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    p9.ggplot(df, p9.aes(x<span class="op">=</span><span class="st">&quot;Day&quot;</span>, fill<span class="op">=</span><span class="st">&quot;Vegetarian&quot;</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># geom_bar counts the number of recipes per category and plots and chat suggested I add position = dodge</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_bar(position<span class="op">=</span><span class="st">&quot;dodge&quot;</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Asked chat to assign distinct colors to the vegetarian and not vegetarian bars</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_fill_manual(values<span class="op">=</span>{<span class="st">&quot;Vegetarian&quot;</span>: <span class="st">&quot;seagreen&quot;</span>, <span class="st">&quot;Not Vegetarian&quot;</span>: <span class="st">&quot;firebrick&quot;</span>})</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adding labels</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.labs(</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">&quot;Meal Plan 202 – Number of Tasty Recipe Matches Per Day&quot;</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">&quot;Day of the Week&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">&quot;Number of Matching Recipes&quot;</span>,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        fill<span class="op">=</span><span class="st">&quot;Meal Type&quot;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply clean theme and rotate x-axis labels</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme_bw()</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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4vSZDqbXwnkeQ7XpiTSxjnpW67NPr4XuS/sY2r/T+qCDhOFGRkSiCQJVYav3nfYl9Fi0rdBBRG1DM6Mffb169ezJ2Xf9888/47qf7NX72Xl93Muj/etw78NI9B7XAVh9vmh7rWXRMhUvXtx+xujvn332WbpfY42E0bqu/RytL3ptzz//fNOnT5+o30fivb6czDYws2i/I/i9H47aQfXt29duF/QdwNlX0YH5xx57zP4/Fu7PRmc91LZs2LBhtlBA73097+79pESEw3qsDn23UT/QzPguqcs4z4+2f+n57qZts3NdTayX3Sa3AhCjFKRL3759tTdtT3Xq1LF/e/DBBwN/GzRoUNjr/vPPPyn58+e3lytdunTKkSNHUl555ZXAdatWrRr1/v/++++Udu3aBa4T7lSwYMGU119/PertPfTQQym5c+eOens6lS1bNuXbb7+NepvDhg0LXKdp06YpXnDfpk5r166Nep0nnngi1XW2bNmSoeUcOXJkSpEiRWJ6jvLly5fy0ksvRV02Lb/7evLdd9+llCtXLuLtd+rUKeXYsWMpiXLLLbcEluX0008Pe7knn3wycLlChQqlHD16NOptP/fcc4Hr5M2bN+Xff//1ZJkbNmwYuN0rrrgiJav64YcfUq0LO3bsSPn5559T/e2LL74Ie/158+bF9B7KyPs31uvof87ldJ2//vor5eKLL464zj/66KOpbuO1115LyZMnT9jLlylTJmXRokXpWl69p3r27BlxOUqUKJHy+eefp8RqzJgxKRUrVoy6zbjwwgtT1q1bF/PnTufOnVP2799vz0PdnhfbXH2OFS1aNOqy67Noz549IW9Dn2exbDN10uPzUvD2Va93KDt37rTbsViXs0WLFvZ9F83vv/+eUqtWrZhvN/gzw/0+ieWkbYN8//33gb/pPbJ169aYni+9D3PlyhW47vTp01NOhnt9dT7founQoUPg8tonycz3l3v/Sp9xOXLkiHq7OXPmtJ/ZkbbTkfbp3O9fPV+6b61fke7zzDPPTFm8eHFMj0XbtKeeeiqlQIECEW9Tj1XLcvDgwRSvuLev+vwX7Y86f+vVq1fY6x4/fjylcuXKgXV4+/btKZ999llM65PX7+f0vAcjLde0adPsaxfLbYRbZ4LXF30GaH8w0m2VLFnS7iMkYn052W1gPLf7bvpO477OqFGj0lzmwIEDKd26dYv6XUn/7927t12HI3F/Nmp7sWDBgpSaNWuGvM1YHkMs96PXLL327t2baj+gbt26mfJdUvdbuHDhmPZrg7nfZ/369Uv3YwaQPTAWzQM6Qq0m0aIjxd27dw95uU8//TQwhEA9kWKZMMlNVTQ6YrpixYrA33QEUpVPOoqsyic1r9aRVB1N7NGjh2087x6KHMw9a7roiJmObKra4d9//7VHNDWxkGiGblVlqRIy3HDmZKKjz246EpkRq1evDjRKF1VB6Wimqgp0H6rm1FFz0dF7HQneu3ev6d+/f8z3oeoeHYnWkU71JNJrWqZMGTthgI5IO1UsGj6mylBVZiWCu5KrbNmyYS/n7rV5wQUXxDTsVUfVHXpeVa2pSobMWuasSJXCqkhyZstV1ZKqXtx9rZKVZiBVFatTlasKEVWc6L2zaNGiQEWIJjTTNknbM633en+JKj9VlaJzbaec6mtVIWg7pdtV5UEsVIWiymvndvX+07ZVt6vbE20H27VrZ7fj0arrXnjhhTR9WfXYnIowbcO1bRZVUmrdVzWnqmKi0bZAnx/jx48P9FFUxaq2b7FWzkWi2V+De6GpMlfLrtdG2yPnM0N9dVWN+91339kqITf133Ueo7Zvzmeftgeayd3ttNNOM4mgz8ngz1Mti5ZPn8/6zNM64FSgqIWNKtVVBaVKw1BUKawRAdp2O/QanX766fZc1S96XtasWROoTgmuUlH1jCqAVEXvTEih59ddJenmPJ+q2tL96DFpmbU/opEi0ajyyHm/6fru3smZxV25He19G4/3l14PTai3atWqVH/XdVQBrddI7Yt0OdHv7v2Ck6H3k6o+Z8+ebX/XZ78qF7U/oWpJraeibZpGtuixuEc2BNP1tK1y9+lWRZRuU62BdHtar7SPp+2J1hNtO7R+Z3Q/KRpVKWpd1GP95JNP7Gvo7gfubn/g7E9pn0jPRaLez1ofRNs8p3WVPqfSs70aOnSo7a3o3s/Wcp155pl2ufQ5qGXWbNzinEei96qqKp1RQaq00/tWz+eSJUsC7yVVgOo51Dqkz9DMWl+82AYmy/cEfe6rXZn63ju0P6vXT+um85mo51CvsfZRVB0+atSomO5fz4FGljmvu75b6HuY1otYK0rjRdthjSpQP3/ReqR1K1TrNi+/S+p+NefAe++9Z39XlX8sIxo0n4GzP6l9YE3sCgAhJTqB9UMFqOjImPP3ZcuWhbzuRRddFLiMjvhJrBWghw8fTjn33HMDly1VqlTKe++9l+YorI5m33///amOto0fPz7s7V555ZUpN910U8qnn36asnv37jT/P3HihD16fd5556U6eqejz8leAdq6devA5VVJEHxUNtbl7N+/f0qjRo1SBg8enLJ+/fqQl1m6dGmq6khVh8yZMyfmI9WqCNa5qom3bduW6rJr1qxJte6oUieWx+81VQnpcTnLoYq5cKpXrx643F133RXT7W/YsCHVczJixIiTXubgCsmBAwem+KkCVFTt6K5YGj58eJaoANU2TOdNmjSx1SLB64K7MlSVLKoY0PqnKvoBAwak2vZpO/Xuu++mqmKLVFXoXl4th54/Xffpp59O2bdvX6qqmNGjRweWVSdVRGzatCnsbQdXK91www1pqra0vJMnT071PlGlWrhKaffnjlONrm3Gxx9/bEcSuK1atSolo8aNG5dq2fW5Nnv27FSXUUXW3XffnepyN998c7oqXuIt1kqgjRs32s+zxx9/3G6vQz3/qnB94403Uo0C6N69e9j7fuCBBwKXq1Chgv38DVW1r8/QsWPHptx4440pL7/8smfvxVdffTVwHVUVRaN1sVq1aoHrhFuWeFaAav9GFdbO5bVNyMz3lyq83Ptw2h507drVfvYG03ZX+17nnHOOff28qAB1Pv+1ndH2xr2+aHuk7ZJ726bHEqnKTOune39B63fwfoWec1V6a7SQc9kePXqkxKsCNHifTK9PKO3bt09T+RVrBWg83s+hqi9jpXXB/bpp2fQ5Fbz/rPX1t99+S3nsscdiqgB11pfTTjst5Ztvvkm1Lujnd955J1U13h133BFxOb1eX7zcBsa7AtS9vdRp1qxZqf7vXmf12LWcwaMe9B595plnUr3Wb731Vkyfh8562KxZszT7QXp+gkeuZWYFqGh/0v38hNrmxeO75Pz58wOX036f9gmjcVdEX3311Rl4tACyCwJQjwJQfSg6f9fQ62ArVqwIeb1YA1CV8juX07CvUDvmwaGdc3kNCdKHTyjuL/uR6AtCgwYNArepHaxkDkD1JcW9o6YAMaPLGetzJO7wuW3btjHvqOmkUCcc7VC4h8frC1Fmc7d60BfEhQsXhryc1jV3UKodw1hoB9m9Axnr9SK59tprA7en4Gzz5s0pfgtAg7806kt/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qFDclhHZi2cBqELL3r17m1NOOcXMmjXLTmwUToMGDczMmTPNOeecY6+j3p/6W40aNcykSZNM3bp1zZYtW8xHH31EAAoAAAAAAJLG5ZdfbmbMmGH27t1rhg0bZp555pmwl503b575448/7M9t2rSJedh8VqdMKFIu5A42Tz/9dDuvDJAleoC+/fbbtpdnr169Iq7kDl2mZ8+edsj7wIEDU/29a9eu9rZmz57t1eIBAAAAAACctIIFC5p27drZnz/88ENz4sSJqNWfCvg05wmALB6Aqn+nXHDBBTFfR1WfoopRN1WEytatW71aPAAAAAAAAE/ccccd9nzDhg3mu+++C3kZDXcfNWqU/blLly6BGdVjoesOGjTItGzZ0lSqVMlOoqSCMY2kVTHZ+vXrI15fE0uPGzfOdO/e3eY0pUqVMnny5DFFixY1Z555ZqAtYbJRMdypp55qnysNi9f8MNG8+eabYSemcv6u518WL15si+50H2pJoOeladOm5v33348YZLtpxHKfPn1Mo0aNTNmyZU3evHlNmTJlTJMmTcyrr75q9u/fn8FHjywRgGqCI2dljZVz2eCgs3Tp0vb88OHDXi0eAAAAAACAJzTniSZ+dld5BtPcJnv27DE5c+a0PS/TU2B22mmnmfvvv99MnjzZbN682U6ipNtatGiRee211+ywcc29Es4tt9xibrjhBjN48GDba3PXrl02TNy3b59ZtmyZ+eCDD+zE1I8++mi6cpx4U1h5zz33BILG8ePHR73Ou+++a88VZmqemXAUjqovqZ43zUGjkFjPi1o03n333TYI1XMciUJphafPPvusnQB8x44d5ujRo+bvv/+2xX0aFX3GGWcEJgeHDwNQHUVw+lvEyjna4FzX4TQFLlmypFeLBwAAAAAA4HkVqCotd+/eneb/ChnlsssuM1WqVInpNtVbVJdX6Fm4cGHzyCOPmE8//dTOu6JgVOFn1apVbSCqSkanwjSYwk4FdQ8//LD55JNPbIvBhQsXmokTJ5rnn3/eVpWKJrPWKZnceeedtuJV/ve//0W8rELHJUuW2J9V5elcL5iCY92uqj7Vs1XX03Oq8FRhsuj51eRN4QLhF154wYbSyqz0er744os2oF2wYIGZOnWqneNGvU312l155ZVm+fLlJ/lMICkD0PPOO8+uJC+//HLIN34wXUalwUr3dV23FStW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X5qsFD7Kww8/bIoXL57oxYEfA1C9IZ588kmzcuXKdF2PABQAAAAAACA+7rjjDhuALliwwCxevNjUrVs34uX/+usv89133wWum5U8/fTT9lzVl4kKQEuXLm3OOOMMU6FChYTcP+I4BP6NN94wN998sw0/VfEZ6wkAAAAAAADx07hxY3P66afbn4cNGxb18h9++KE5ceKEDfBatmyZCUvoL/fff79ZtmyZeeGFFxK9KPAyAF2+fLnp3bu3/blOnTpm3Lhx5uuvv7a/q+fB6tWrzbx588ygQYMCRxmaNGlili5datasWePVYgAAAAAAACDMMHj5+OOPzbFjxyJeVtWi0qlTJ5MrV65MWT4g6QNQBZvHjx83JUuWNLNmzTLXXnutqVKlSuD/1atXt30munXrZn799VfTtWtXe7mePXsygzwAAAAAAECcde7c2YaZ27dvDxSthTJz5kyzatWqNMPfNdeLbqNatWomf/78dni5KkuHDh1qq0XDmT59urnqqqtMiRIlTKFChcy5555rBg4caK/TrFkzWzjnBK7BtmzZYgvuVExXuHBhe/2zzz7b9vncu3dvyImH3FmUfndOTm9QZ4j/22+/ba6++mpz2mmnmYIFC5oiRYrY237iiSfsnDahaDl1W1puLb8exwUXXGCKFStm/75u3bqokyApF9P/L7nkEnPKKaeYfPny2edGvytfCxdO67acx3Hw4EHTt29fO8xer0WZMmVMu3bt0t2SMrvwLADVm0Mvwr333mtf9Ej0Zhs8eLANRL/55hszZswYrxYDAAAAAAAAIbiHs0caBu/87+KLLw4Mm3/llVdM/fr1zUcffWR27dplatWqZQPDH3/80dx5553m+uuvDxncvfvuu6Z58+bm22+/tYFh7dq17fUfeOAB0759+4jLO23aNHPmmWfa+1awV7lyZVtsp9HE6vOp5VGQ6dD/tMwO/V+/Oyd3od6AAQPMgw8+aH744Qdb0KeAtXz58nbY+osvvmhD2vXr14ddNrV0vPHGG+3j2LZtmw0i1fczFnfffbddfk0gruBVoWvRokXNTz/9ZIfOa/Kpo0ePhr2+gt9GjRqZZ5991mZsCnD/+ecf8+mnn9q/R1ru7MqzANR5chs0aBD4mzt1D34T6H/du3e3K8yIESO8WgwAAAAAAACE4VR0qgJUlaDB9u/fbz777LNUl1XhmqowFXiqAlJh22+//WY2btxo2x0qgJswYYLp379/qtvSZEsK9JT9OEGhLq8MaeLEifb0888/h1xOVaBq9vk9e/bYisydO3facFLh54YNG2yQq1C0Y8eOqR6bAlmHHod+d07ualZd//vvvzf79u0za9euNXPnzrW3p0BVl9O5RjGHo7BSxYAKdrU8ur6qVRXSRtOjRw+zaNEi+9jUUtJ5Tv78809z4YUX2uXSPDvhqOpUweeKFSvMkiVL7POsnxXC6nliovE4BqB6g4j7hS5QoEDgZ61QwdQrVPSiAwAAAAAAIL5at25typYtawvV1As0mKoI//33XzvcvG3btvZyjz32mP3f+++/b4fA58yZM1WV5ejRo22hm6oqDx8+HPjfq6++aisZNbT7rbfeskO1Ha1atbL/P3LkSMjl1DBvZUkqnnv++eft8rgrWRXKVqpUycyYMcPMmTMn3c/DZZddZi699FKTO3fuVH/Xc6PHqduePHmyDW1DUdWogsgrrrgi8DfdVvDthaLKV1V9BlN1rFMkGK4lgOj51+uk4Nk93F/PkyiMRpwCUGdFdJfoqn+BI1T57aFDh+z5jh07vFoMAAAAAAAAhJEnTx5z2223hR0G7/xN4aeynl9++cVmOhrefdNNN4W8TbU41PwuqmhcsGBB4O8KEEXzwISiMFX9L4MpWxo7dqz9OVwVpqpRW7RoYX9WxWRGi/kUNN511122R6n6mSqs1bnCV1Wuql9nuPvXc5RRqjB97bXXbBh6+eWXB+7bmahK1a7q8xmKhsifeuqpaf6u4e+ye/du22YA/0/0WDpGaoD7+++/2xfQGQavZrhqwqrGsSo1Puecc1JdRyW+oga2AAAAAAAAiD8N8Vb4pqHT8+fPt1WcoiHgzhByZ7i4M2pXlZoK6cLR0GtxenIqDHWqJ4PzIPfIYQ3bVp7kpuU4cOCA/VlzzYTjFNu5+4DGSkPv27RpY4etR+I8rmBa7liqPUMZMmSIefjhh1NVywZT+KoQU5WowZy+rMHKlSsX+FkBriYqh8cBqNJ+rbCaEUxNYN0lxSqF1htLs1EpEHVWZjWxVYl0uDcCAAAAAAAAvKWh1uo1qepOVXw6Aagz7FrhnjOZkKoJnYl31PcyGie4dLdC1AQ/4aiSMphzn5Ke+4yVlk39RRXQahj8448/boekKzDMmzevvUyTJk3MrFmzwk5GlNFiPvUKdebEUXWrqmAVaOo5Ul9PTRSlc0nvfbtbE+j2EYch8Ao69eSqga2bXlRRQ1i9gVQurUaz5513XuBIgGYLAwAAAAAAQOZwsphRo0bZSkQFb5rhXZxh2O6WhxdddJHNfaKdunTpkibYVHgaTqg5Y9z9PlV5Gu0+I/XLDGXSpEk2k9I8NpoMSn08NQO8E35Gqvw8WVpWLbOqT9955x0bRKuFpBN6xut+szvPAtBrrrnGpuVqAqvqTof6F6isVy+uZglTD4cpU6bYhrqifgnqdwAAAAAAAIDMccstt5iCBQvaastx48bZrEZDyRXEderUKXC5s846y55r9nVlPrEqVqxYYEh2uMmv1eNSs5cHU0Wk0xv0jz/+MF5bvXq1Pb/gggtSTeDt0NBzzc4eD859q8I0lNmzZ8flfrM7TydB+u233+yKWbNmzVT/e/311+1RBDVjVZmuVmINe9cMYJ988olXiwAAAAAAAIAYqELTmdRIw+CdyY80alezrLsL2ypWrGiD0g8++CBd96Hbkvfeey/k/zXjuTNBtptCSc1WL5opPr0U7EYaGu/8P1z/T7VxTE/Ym5FlC3XfKh7MyONFJgag0XTs2NH2bVDZs1ZA9Qq9//77U/UnAAAAAAAAQOYOg586daqtAnVPfuTQsHDN4SIPPvigGTBgQJrZyTWb+hdffJHmuo8++qiddX7mzJnmkUceSTXpj4ah9+zZM9Wwc7fnnnvOhrQaoq9Z5Ldu3Zrq/8eOHTMzZsywj0FtF91OO+00e/7dd9+FvO1mzZrZ8zlz5pjBgwcH+mXqNt944w3z4osvmvz585t4cO5bw981EZNDo6ZVeatJqeA90kcAAAAAAIBsSMOwFRaq/6d6bZYtWzZQeemm1oUKPlUVqSBTkwVpZG/Dhg3tKGANd1c1qYbRu9WtW9e8/fbbdgJsXV9D4hs0aGCqV69urr76alshqtHC4vTAdGgemfHjx5vSpUvbClLNhl6rVi17ed2uwlGFiUOHDrXL7uYM4X/ooYfMmWeeaZo2bWov6/QKrVevXqBXqeauUYWrhsNr+Xr06GFDVfXmjIe77rrL1KlTxxYIaqIpPX+aWFxVtyNHjjTvvvtuXO43uyMABQAAAAAAyKbcVZsavauKzVAUJqrt4X333WcDzFWrVpkFCxbYSYwUpL700kvm+++/T3O9e+65x/5dEw3Jn3/+aWc8V6WlqjtVPRpupniFlsuWLTPPPPOMDShVBTpv3jyzadMmGyL26tXL/Pjjj+bUU09NdT2FtBpKrqBT1aGqQFW16Lp16wKX0XB+DXWvXbu27fmp+WwUsCpQjWcIqdaQml3+gQcesKGulmnjxo32+Zk+fbq57bbb4nbf2VmOFKfOFwkzaNAgs2PHDlOmTBm7IUHWsX37dlsinzt3bnukDPAT1m/4Hes4ssM63uKjBxO9GL6xqOfoRC8CXNiGZ11Z7ftvvVdvMVlBVt1GqaJU1aSqhvz9998DEy4BXsudkSvFIwlXPwcAAAAAAABkD6NHj7bhp4a5qxITSKoA9N5777X9G7yi2yIABQAAAAAA8Bf1tdTw9quuuspWbYsGI3/++ee2/6aoGji4ByiQ8ADUweh5AAAAAAAAhLNw4ULba7NgwYLm9NNPtz1GV69ebftuyuWXX26efPLJRC8mfO6kAlCtvG3atDHNmzf3bokAAAAAAADgC23btrXD3DVZ0fr16+2kSaoI1QRHHTp0sLOxO5WhQLxkaA1TWn/06FFz8OBB8/HHH9uVWCvs7bffbipXruz9UgIAAAAAACDLadCggT0BiZQzI1fasmWLef31103dunXtMPi1a9eafv36merVq5uWLVuazz77zAakAAAAAAAAAJDlAtCSJUuahx9+2CxatMjMnTvX3HPPPbZ8+fjx4+bbb781t9xyi6lYsWLgMgAAAAAAAACQZQJQt/r165vBgwfbqtARI0bYHg6yc+dO8/bbb5vzzjvPnH/++fYye/bs8WKZAQAAAAAAACBzAlBH/vz5bfPa77//3qxatcrO4FWpUiU7RP7XX381999/v6lQoYK9zLRp07y6WwAAAAAAAACIfwDqpl6g/fv3t7N7ff3113ameE2cdOjQITNq1Chz7bXXxuNuAQAAAAAAACD+AagjR44cdlIkhZ4DBgywVaKiqlAAAAAAAAAAiLfc8bzxP/74w3zwwQdm5MiRtieoo3DhwvG8WwAAAAAAAACITwCqiY4++eQTM3ToUNv7013xeckll5g77rjDtG3b1uu7BQAAAAAAAID4BaDfffedDT3HjRtnDh8+HAg9NfFRp06dbPBZs2ZNr+4OAAAAAAAgrhb1HJ3oRQCQ6ABUkxwNGzbMfPjhh2bDhg32bwo+NeFR69atbeipHqA5c8a11SgAAAAAAAAAeBeAqqenqj2nT59uA0+n2rN27do29LzttttMmTJlMnLTAAAAAAAAAJDYALRjx452hncFn0WLFjW33HKLDT4bNGjg3ZIBAAAAAAAAQCKHwBcsWNA0a9bM7N271wwYMCDDt6MwVRMnAQAAAAAAAEDSBKAHDx40EyZM8GRBCEABAAAAAAAAJE0A6vT99IIqQAEAAAAAAJJJv379TFaQVZYTyFIB6Nq1a71fEgAAAAAAAABIhgC0atWqXi8HAAAAAAAAAHgup/c3CQAAAAAAAADJgQAUAAAAAAAAgG8RgAIAAAAAAADwLQJQAAAAAAAAAL5FAAoAAAAAAADAtwhAAQAAAAAAAPgWASgAAAAAAAAA3yIABQAAAAAAAOBbBKAAAAAAAAAAfCt3eq+wYcMGe16pUiWTK1eueCwTAAAAAAAAACSmArRatWqmRo0aZvny5an+/tFHH9nT3r17vVkyAAAAAAAAAEjEEPiUlJQ0f+vSpYu5/fbbzV9//XWyywQAAAAAAIA4UGFbjhw5zPTp0+0o3zvvvNOO8s2XL5/936OPPhqyuO3XX381/fr1M5dccok55ZRT7OVLlChhfx80aJA5duxYyPtTXqT703UPHjxo+vbta8444wyTP39+U6ZMGdOuXTuzcuXKTHjkyM7SPQRew95PnDgRdsUGAAAAAABAcvv999/NDTfcYEPJOnXqmLx585r169eb119/3cyePdvMmjXL5M79/2Kju+++2yxYsMAULVrUlC9f3px99tlm+/bt5qeffrKnL7/80kyePNnkyZMn5P0pVG3UqJG931q1apnTTjvNji7+9NNPzbRp0+xtV61aNROfAWQn6a4ALV68uD1fu3ZtPJYHAAAAAAAAcdazZ09zzTXXmG3bttnwUTnP1KlTTcGCBc2cOXPMiBEjUl2+R48eZtGiRWbPnj02uJw3b54NTP/8809z4YUXmu+//9688cYbYe9v4MCBtqhuxYoVZsmSJWbx4sX2Z1WD7ty50/Tp0ycTHjWyq3QHoGeddZY9f/bZZ+3KGlwJqrJmAAAAAAAAJK9TTz3VfPDBB6ZYsWKBv1122WV2SLxMmDAh1eXbt29vqz6D1a5dOxCWDh8+POz95cyZ01Z7qvLTUb16dfP888+HvD8goUPgO3XqZPtEqPdDvXr10vQGrVu3broXQqEpQ+oBAAAAAAAyR9euXUMOV9cw9bffftusWrUqzf8078uYMWNsxaiGvx8+fDjVPDHLli2zQ+oLFCiQ5rpXXnmlDV1D3Z/s3r3b7Nq1y5QsWdKDRwecZACq5rXqAzFs2LCYJ0gCAAAAAABA8jj99NND/r1cuXL2fN++fan+PmTIEPPwww/b0DMcZUIKMTWpUnrvz7lPAlAkRQAqKpHu1q2bbW6r9F8r/4cffmgrOa+99tpAn1AAAAAAAAAkn0KFCoUdqh5c4DZ37lzTvXt3+zflQZ07d7aBpiZEcibL1rkcPXo0Q/cXfJ9AwgNQqV+/vj05FIDKc889Z/s/AAAAAAAAIOtTb0+Fk23atDHvvPNOmv9rEiPAV5MgAQAAAAAAIPtYvXq1PW/SpEnI/8+ePTuTlwjIpArQYGvXrrXnofo8AAAAAAAAIGsqWLCgPd+yZUua/6ky9NVXX03AUgEJqACtWrWqPeXO7VmmCgAAAAAAgARr1qyZPdfw959//jnw93/++cd06tTJzJ8/P4FLB0QXt7RSs35Nnz7dLFq0KNALolSpUqZevXrm0ksvNSVKlIjXXQMAAAAAAMAjd911l3nvvffMn3/+aS6++GJz6qmn2gmQlixZYo4cOWJ7hCoIBbJNALpv3z7Tu3dvOymSZocPJV++fOb22283L774oilSpIjXiwAAAAAAAACPaAb3WbNmmb59+5qxY8eadevW2cK2K664wvTs2dM0btyYABTZJwDdtGmTadq0qe0Hqh4Q4Rw6dMgMGTLETJkyxcyYMcNUrFjRy8UAAAAAAABACAovow13D5XpKPB866237CmUcDmQqkN1iiRShgQkVQCqlfW6664za9asCUyG1KVLF1saXaFChUCz3J9++slWh/711192FjFdZ+7cuSZHjhxeLQoAAAAAAAAAeBuAjhw50ixcuNAGmR06dLAVns4sYQ71/7zqqqvMk08+abp162Y++ugje53Ro0ebW2+91atFAQAAAAAAAABvZ4H/7LPP7HnDhg1tsBkcfroVKFDAlj/rsjJmzBivFgMAAAAAAAAAvA9A58+fb6s/77///piv88ADD9ih8wsWLPBqMQAAAAAAAADA+wD077//tudnnHFGzNdxLutcFwAAAAAAAACSsgeohrUfPXrU7N+/P+br7Nu3z57nz5/fq8XI8pj5LGvJmTOnyZUrlz3ntYPfsH7D71jH4Xdat+EdthPJhW04ACAhAWiVKlXM4sWLzbfffmuaNGkS03WmTJliz6tWrerVYmRp+uA+duxYohcD6VCsWLHAz7x28BvWb/gd6ziy0zqOk8d2IrmwDc+6CKwBZOkA9PLLLzd//PGHefPNN027du3M2WefHfHyzmXVN1TXhbHPRe7cnr0kyAQ7d+40x48ft0efS5UqlejFATzF+g2/Yx1HdljH4R3205ML2/Cs/b0XADKbZ5/i9913nxk4cKA5ePCgadq0qXnhhRdM586d7dB4t0OHDtkZ4P/zn/+YAwcOmDx58tjr4v/wYZC1nDhxwu546XXjtYPfsH7D71jHkR3WcXiH7URyYRsOAEhIAFqjRg3z3HPPmd69e5u9e/faULNnz56mXr16pnz58vYyW7duNYsWLbIhqVP2rqC0evXqXi0GAAAAAAAAAAR4Oo5DgaeaUD/xxBN2QiRVeM6ZMyfVZZzgU5WfL730knn44Ye9XAQAAAAAAAAACPB8asgePXqYZcuWmUceecSceeaZgdDTCT71N11m+fLlhJ8AAAAAAAAA4iounbw1pP21116zJ1WC7t692/69RIkStvITAAAAAAAAADJD3KcyVOBZtmzZeN8NAAAAAAAAAGR+AAoAAAAAAJAV9evXL9GLACAZe4ACAAAAAAAAQLIgAAUAAAAAAADgWwSgAAAAAAAAAHyLABQAAAAAAACAbxGAAgAAAAAAAPAtAlAAAAAAAAAAvkUACgAAAAAAAMC3CEABAAAAAAAA+JZnAWjz5s3t6YMPPvDqJgEAAAAAAAAgOQLQmTNnmhkzZpiqVat6dZMAAAAAAAAAkBwBaOnSpVOdAwAAAAAAAECi5fbqhmrWrGl27NhhNm3aZM455xyvbhYAACBuWo7skehF8I1FPUcnehEAAACA+FaAtmnTxqSkpJgvv/zSq5sEAAAAAAAAgOQIQLt162Zq1aplPvroIzNu3DivbhYAAAAAAAAAEh+A5suXz0yePNmcddZZ5qabbjKdO3c206ZNMzt37rSVoQAAAAAAAACQZXuA5sqVK/CzAs+PP/7YnmKRI0cOc+zYMa8WBQAAAAAAAAC8DUCDqzyp+gQAAAAAAADgmwBUQ94BAAAAAAAAwJcB6LBhw7y6KQAAAAAAAABIrkmQAAAAAAAAACDZEIACAAAAAAAA8K24BqCaCGnnzp1m48aN5vjx4/G8KwAAAAAAAADInAB0zJgxpnnz5qZQoUKmbNmypnr16mb58uWpLvPNN9+YPn36mNdeey0eiwAAAAAAAAAA3k2CJPv37ze33HKLmTRpUqACNJxSpUqZ/v37mxw5cphWrVqZWrVqebkoAAAAAAAAAOBtBWjHjh1tZaeCz3POOcc8+uijYS974YUXmjPPPNP+PH78eC8XAwAAAAAAAAC8DUAnT55sg0xVdL700ktmwYIF5pVXXol4neuuu86GpbNmzfJqMQAAAAAAAADA+wB0+PDh9vzqq682vXr1iuk6559/vj1ftmyZV4sBAAAAAAAAAN4HoHPmzLHVn507d475OpUqVbLnW7du9WoxAAAAAAAAAMD7AHT79u32/NRTT435OgUKFLDnhw8f9moxAAAAAAAAAMD7ADRPnjz2fO/evTFf5++//7bnxYsX92oxAAAAAAAAAMD7ALRChQr2fN26dTFfZ/bs2fa8WrVqXi0GAAAAAAAAAHgfgF5yySV2RvcxY8bEdPlDhw6Z999/3/YNbdKkiVeLAQAAAAAAAADeB6AdO3a0599++62ZNm1axMseO3bM3HHHHWbjxo3299tvv92rxQAAAAAAAAAA7wPQZs2amdatW9sq0Guvvda88MILqYbD//vvv2b16tVm6NCh5vzzz7eVoqr+vO2220ydOnW8WgwAAAAAAAAACMjt5Y19/PHHpmnTpmbRokXmv//9rz0p5JSGDRumuqyC0gYNGph33nnHy0UAAAAAAAAAAO8rQKVo0aJ2YqNu3brZWeEVcoY65cqVy3Tt2tX88MMPpmDBgl4uAgAAAAAAAADEpwJUChQoYAYNGmSrPydMmGDmzp1rtm3bZvt+lilTxtSvX99cd911pmrVql7fNQAAAAAAAADENwB1VKhQwVZ56gQAAAAAAAAAWX4IPAAAAAAAAAAkEwJQAAAAAAAAAL4VlwD0n3/+Ma+//rq54oorTLly5eyESDrpZ/1N/9u9e3c87hoAAAAAAAAA4heAfvjhh6Z69eqmV69eZtq0aWbHjh3m+PHj9qSf9Tf9r0aNGuajjz7y+u4BAAAAAAAAID6TIL366qvmsccesz+npKTYc832Xr58efvz1q1bzfr16+3Pe/bsMbfffrsNRR999FEvFwMAAAAAAAAAvK0AXbhwoXn88cdt8Jk/f37z9NNPmy1btpi1a9ean3/+2Z70s/7Wr18/U6BAAXtZXefXX3/1ajEAAAAAAAAAwPsAdMCAAebEiRM22Pz+++/NU089ZXt+BtPf+vTpYy+joFTX0XUBAAAAAAAAIGkD0OnTp5scOXKYBx54wFx44YVRL6/L6LKqAv3hhx+8WgwAAAAAAAAA8D4A3b59uz1v2bJlzNe5+uqr7bn6gAIAAAAAAABA0gagJUqUsOdFihSJ+TrOZYsXL+7VYgAAAAAAAACA9wHo2Wefbc+XLVsW83WcyzrXBQAAAAAAAICkDEA7d+5s+3kOHDjQnkejy7z11lu2b+jtt9/u1WIAAAAAAAAAgPcBaPv27c11111n5syZY3/et29f2Mvqf7feequZO3euueGGG8wtt9zi1WIAAAAAAAAAQEBuk04zZ84M+7/77rvPbN261Xz66afmu+++M23btjWNGjUy5cqVs//ftm2b+fnnn+3/d+3aZRo2bGi6d+9ub7NJkybpXRQAAAAAAAAA8DYAbdasmR22Hs3OnTvNkCFD7CnU8Hfdxi+//GJatGhhfz527Fh6FwUAAAAAAAAAvA1AJZYen9EuF+ttAAAAAAAAAECmBaDDhg3L8J0BAAAAAAAAQFIHoJrtHQAAAAAAAACy1SzwAAAAAAAAAJBsCEABAAAAAAAA+BYBKAAAAAAAAADfytAs8NHs3r3bzJ4926xZs8bs3bvXHD9+POp1+vTpE49FAQAAAAAAAJCNeRqA7tq1y/Tq1ct88skn5ujRo+m6LgEoAAAAAAAAgKQNQFXp2aRJE7N06VKTkpKSruvmyJHDq8UAAAAAAAAAAO8D0BdeeMEsWbLE/nzOOeeY7t27m/POO8+UKFHC5MxJq1EAAAAAAAAAWTgA/fLLL20lZ9OmTc2UKVNM7txxaS8KAAAAAAAAADHzrDRzw4YN9vzRRx8l/AQAAAAAAADgrwBUQ92lUqVKXt0kAAAAAAAAACRHAFqrVi17vmnTJq9uEgAAAAAAAACSIwC988477ezvY8aM8eomAQAAAAAAACA5AtD27dubq666yowcOdKMGDHCq5sFAAAAAAAAgAzzbLYizQCv6s/OnTubLl26mK+++sp06NDBDo0vVKhQ1OtXqVLFq0UBAAAAAPhcy5E9Er0IvrGo5+hELwIAxJWn07UXKVLE9OzZ08yePduMHTvWnmINT48dO+blogAAAAAAAACAd0PgpV+/fqZx48Zmx44dth9oek4AAAAAAAAAkLQVoBMmTDDPPPNMoKLz4osvNueee64pUaKEyZnT05wVAAAAAAAAADI3AB0wYIA9L126tJk4caJp0KCBVzcNAAAAAAAAABniWWnmH3/8YSs/+/btS/gJAAAAAAAAwF8B6MGDB+15o0aNvLpJAAAAAAAAAEiOAPSUU06x54cOHfLqJgEAAAAAAAAgOQLQVq1a2fNZs2Z5dZMAAAAAAAAAkBwB6COPPGJnfH/99dfN5s2bvbpZAAAAAAAAAEh8AFqxYkXz1VdfmZSUFHPRRReZCRMmeHXTAAAAAAAAAJAhuY1Hmjdvbs9LlixpVqxYYa6//npTtGhRc/rpp5tChQpFvK5mj582bZqJp927d5vffvvNrFq1yqxcudKsWbPGHDlyxJQvX968++67Ua//66+/2lBX1z1w4IApVaqUqV+/vrn55ptt5SsAAAAAAAAAHweg06dPt0Gm6FyVoHv27DHz58+PeD1dzrlePM2cOdN88MEHGbrumDFjzCeffBIIeKtUqWI2btxoJk6caGbMmGGef/55U7VqVY+XGAAAAAAAAEDSBKAKBTMjyMyoggULmnr16pnTTjvN1KxZ02zatMmMGDEi6vUWLlwYCD+7du1qJ3vS49y3b595+eWXzaJFi2wAOnDgQJMnT55MeCQAAAAAAAAAMj0AXbdunUlmLVq0sCdHrEPunfCzadOmpnXr1oG/FylSxPTq1cvcfffdZsuWLfb2rrrqqjgsOQAAAAAAAICET4LkR1u3brU9P6Vly5Zp/q8ep5rwSWbNmpXpywcAAAAAAAAgMgLQCJYtW2bPc+fObSdzCqVu3br2fPny5ebEiROZunwAAAAAAAAAIiMAjUB9QqVs2bI2BA2lQoUK9lwzym/fvj1Tlw8AAAAAAABAJvUA9SNNdCSFCxcOexn3//7999+It/fpp5+azz//PM3fa9SoYfLnz2+OHTtGiJrF6DVzznnt4Des38gu6zi8wXYi+bCOe4t1PLmwfmfd9ZvXDkCWDkAV4mWUZlVfvXq1STaq6pRw1Z+SN2/ewM+HDx+OeHu7d+82a9asSfP3U045xQagwodB1sVrBz9j/QYQDdsJ+B3rOPyM9RuA32X6LPAKOyUlJSXN35KNE25G+jBwQlLJly9fxNsrUaJEyKA4T548gZ8jha1IPu51g9cOfsP6Db/jy5632E4kH9Zxb7GOJxfWb2+xfgPwO8+2ck2aNIkaZGqIuCYL0tByXVYTC5UvX94kK2d4uzMUPpT9+/cHfi5UqFDE22vbtq09BRs0aJDZsWOH/dBRv1FkraEi2vnitYMfsX7D7xjO6i22E8mHddxbrOPJhfU7667f/197dwJu61j3D/w5HEJmhQwdISGRoSKkTEWZMmRIh/ISFaU04C1JA3o1oEQSMh1DRZllpjeRZIjMJEMoY8b9v77Pe93rv87aa+29zzn7nL3Pcz6f69rX2Wev6Vlr3etZz/19fvd9C1uBkTBse57LLrtsSNfLSulnnnlmteeee1b//ve/q5NPPrlaeeWVq9FoscUWq/9NOFlCgE7/+Mc/WtWiDooAAAAAYAZfBX6mmWaqtt566+qKK66onnvuuWqzzTar58YcjZZddtn634SfqVzt5uabb67/fctb3lI/NwAAAABg9BixxO7Nb35ztccee1QPPvhg9YMf/KAajTI8f+mll65/P//88/td/tRTT1XXXHNN/ftaa601zbcPAAAAABjYiJYsbrDBBvW/Z511VjVa7bDDDvW/l19+efWb3/ymtXhT5gU99NBDq+eff74OStdff/0R3lIAAAAAoNOIzj48//zzT9IK8lMi83h+9rOf7bdqYCbPLiFnLLfcctX+++/f+v+qq65abbfddtUpp5xSHX300dUZZ5xRr+b+wAMP1CvAzzXXXNVXvvKViVZyBwAAAABGhxENQO+5557WwkhTWx6j22runX/PvKSdEoBmjs9zzjmnuuOOO6r77ruvWmCBBarVVlutns+0BLkAAAAAwOgyYgFogscy9+dSSy011R9voYUWqs4+++zJvv0qq6xS/wAAAAAA049pPgfoE088UZ133nnVeuutV8+rOWbMmGqLLbaY1psBAAAAAMwAhq0CdOaZZ56s26X6c++99x6uzQAAAAAAGP4K0KyOPqk/G264YfW73/2umnvuuYdrMwAAAAAAhr8CdPz48UOqEs2q6an6XHfddavll19+uB4eAAAAAGDqBaDHHXfccN0VAAAAAMD0uQgSAAAAAMC0IgAFAAAAABpLAAoAAAAANNZkzQH64osvDvuGzDrrrMN+nwAAAADAjG2yAtDZZ599WDdizJgx1csvvzys9wkAAAAAMFkBaF9f3/BvCQAAAADAaAhA3/Oe99RVm1Pi1ltvrf75z38KUwEAAACA0RWAXnbZZZP9gH/729+qfffdt3rsscdaIeoss8wy2fcHAAAAADDiq8A/+uij1ac+9alqhRVWqM4666zW3z/ykY/U1aAAAAAAAKOiAnRSPPvss9Whhx5aHXbYYfXvZcj7uuuuWx188MHVqquuOrU3AQAAAACYQU21APSVV16pjjrqqOob3/hGPdy9BJ8rrbRSHXxuuOGGU+uhAQAAAACmXgA6YcKEar/99qvuvvvuVvA5bty46qCDDqp22GGHqfGQAAAAAABTNwC99NJLqy996UvV9ddfX/8/4ecCCyxQh6F77LFHNeussw7nwwEAAAAATP0A9KabbqqDzwsvvLAVfM4+++zVZz/72frvc88993A8DAAAAADAtAtA77///mr//fevTj755Dr0zM/MM89c7bzzztXXv/716g1veMOU3D0AAAAAwLQPQJ988sl6Ps8f//jH1QsvvNCa53OzzTarvv3tb1fLLrvslG0VAAAAAMBIBaBvetObqqeffroVfK655prVIYccUq2xxhrDsU0AAAAAACMXgD711FPVmDFj6p/Xv/711eKLL14dfvjh9c/kyP2cdNJJk3VbAAAAAICptgjSY489Vp122mlTejcCUAAAAABg9ASgZfj7cEgFKAAAAADAqAhA77nnnmHfEAAAAACAURGAjhs3btg3BAAAAABguM007PcIAAAAADBKCEABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAYwlAAQAAAIDGEoACAAAAAI0lAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLHGjvQGAAAAzCjOWWqpkd6E5tj9HSO9BQBMJ1SAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAYwlAAQAAAIDGEoACAAAAAI0lAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjSUABQAAAAAaa+xIbwAT6+vrG+lNYBLMNNNM1cwzz1z/672jabRvmi5tm+FjPzH6aOPDSxunybRvoOkEoKPsS+fll18e6c1gEswzzzyt3713NI32zYzUxply9hOjjzY+vLRxmmxatm9hKzASBKCjyJgxY6qxY70l05PHH3+8euWVV+oquQUWWGCkNweGlfbNjNDGGT6OYUYfbXx4aeM02bRs3+n3AkxrvsVHGV8G05dXX321DojyvnnvaBrtmxmhjTN87CdGH218eGnjNJn2DTSdiYEAAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAY40d6Q0AYPTa6OS9R3oTGuPPXzh1pDcBAABghqQCFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAYwlAAQAAAIDGEoACAAAAAI0lAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWGNHegMAhts5Sy010pvQHLu/Y6S3gC608WGkjQMAQOOpAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABorLEjvQEAANDunKWWGulNaI7d3zHSWwAAMOJUgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAYwlAAQAAAIDGEoACAAAAAI0lAAUAAAAAGmvsSG8AI+OAAw4Y6U2AfrRLAAAAYLipAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADTW2JHegOnF3/72t+qss86qbr311urpp5+u5p133mqllVaqtt5662qRRRYZ6c0DAAAAALpQAToEl1xySbXPPvtUV199dfXKK69USyyxRPXcc8/Vf99rr72qP//5zyO9iQAAAABAFwLQQdx///3VEUccUb366qvVlltuWf385z+vDjvssOr444+v1llnneqFF16oDj744Oqpp54a6U0FAAAAADoIQAdxyimn1FWfyy23XDV+/Phq7Nj/mzXgNa95TbXnnntWCy20UPXMM89Uv/rVr0Z6UwEAAACADgLQAaS687rrrqt//8AHPtDv8llmmaVab7316t+vuOKKab59AAAAAMDABKADuOuuu6oXX3yx/n2FFVboep3y90cffbR64oknpun2AQAAAAADE4AO4O9//3v9b4a9v+51r+t6nYUXXrj1+4MPPjjNtg0AAAAAGNz/TWhJV5nbM+acc85qzJgxXa8z11xz9bt+LxMmTKjOOOOMfn9fcsklq9lmm616+eWX60pSmFFp/zSZ9k3TaeM0nTZOk03L9p1+L8C0JgAdZA7QKAsfdZN5QDuv38uTTz5Z3X333f3+vvjii9cB6LT8Mth1112nyePApBiu9r/qlVcOy/1QVeeN9AY0yHDu37Xx4aONDx9tfHTSxoeP45TRR/sePkJJoOkEoAPISu+DfRm89NJL/a7fy3zzzVdXew4Uog4UtjL6tLcN7x1No33TdNo4TaeN02TaNwCTwjfFAF772te2hrb39fV1HQb/9NNPt37PUPmBbLPNNvVPpyOPPLJ67LHH6i/uBRdccFi2nWk3VCQHX947mkj7pum0cZpOG6fJtO/pl8AaGAkWQRrAYostVv+bL9YElN08/PDD/a4PAAAAAIwOAtABZLj6rLPOWv9+yy23dL3OzTffXP+bs47zzz//NN0+AAAAAGBgAtABZGGi1VZbrf79/PPP7zr/5yWXXFL/vvbaa0/z7QMAAAAABiYAHcR2221XzTzzzNVtt91WHX/88a3JtrPi++GHH1498sgj9VyhW2yxxUhvKgAAAADQwezDgxg3bly1xx571AsVnXnmmdVFF11UD3d/6KGHqueee64eIv/FL36xmnvuuUd6UwEAAACADgLQIdhggw3qIPSss86qbr311uree++t5plnnmr11Vevtt5662rRRRcd6U0EAAAAALoQgA7RMsssU335y18e6c0AAAAAACaBOUABAAAAgMYSgAIAAAAAjSUABQAAAAAaSwAKAAAAADSWABQAAAAAaCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoAAAAABAYwlAAQAAAIDGEoACAAAAAI0lAAUAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FgCUAAAAACgsQSgAAAAAEBjCUABAAAAgMYSgAIAAAAAjTV2pDeA/++JJ56ojjzyyJHeDCbByy+/3Pp97FgfJ5pF+6bptHGaThunybTv6bvfCzCt+aYYRV555ZXqscceG+nNAAAAAIDGEICOAvPNN99IbwKT6YEHHqheeumlapZZZqkWX3zxkd4cGFbaN02njdN02jhNpn1P//SDgWlpTF9fX980fURokG222aa6++67qyWXXLKaMGHCSG8ODCvtm6bTxmk6bZwm074BmBQWQQIAAAAAGksACgAAAAA0lgAUAAAAAGgsASgAAAAA0FhWgYcpsNVWW1VPPvmkFQxpJO2bptPGaTptnCbTvgGYFFaBBwAAAAAayxB4AAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQCFaeyRRx6pNt100/oHmq609bR7mBIzwr5z3333rZ/fJZdcMtKbwiTKe5b3Lu/hjGBG+Dwy7f3lL3+p29Quu+wyTW8LwIxh7EhvAHRK5+Hmm2+uf19ooYWqo48+uhozZkzP6++///7VTTfdVP++4IILVj/96U+n2bbCUExuB3Hbbbettt9++2HfHnjyySer8ePH179/85vfrN72trd1vd5ee+1V3XPPPdVMM81UnXTSSdVrX/vaftd54YUXqu222656+eWXq3322adae+21p/r2w3Czn4YpO2YfyDHHHFMf0wPASBKAMuorDHJg1atznstzxhdGs+WWW67r32+77bb630UWWaSaZ555+l3++te/fqpvGzOm+eabr1psscWqBx98sN6HdtvHPv3009W9995b//7qq69Wt956a/WOd7yjaztO+BkrrLDCNNh6GH720zD58tnIZ6SXWWeddUj385rXvKZadNFFqwUWWGAYtw4A/o8AlFFr8cUXrx544IHq4osv7hmA/u53v6v6+vpa14XR6OCDDx6w4mjrrbeu1ltvvWm8Vczosl9NANqreueWW26p968LL7xw9fDDD9dBabcAtNw+++EEqzA9sp+GybfqqqtWn/3sZ6f4fpZZZpnqxz/+8bBsEwB0Mgcoo9bqq69ezTHHHNW1115bPf/88/0uT8c8AWiGx6+77rojso0A06tyYun222+vXnzxxX6Xl+r6rbbaqh4C3ysoLX/vdaIKAABgpKkAZdTKcJm11lqruvDCC6urrrqq2mCDDfp1zjMEfqWVVhpwCNorr7xSXXTRRdVll11W3XfffXVHP1VKK664YvXhD3+4Hgba6eSTT65OPfXUOlj9zGc+U/3mN7+pK1H/8Y9/VLPMMks9VC5zfi299NI9H/Occ86pF0XIbWabbbb6rHYqSOaff/6e2/rPf/6z+v3vf19df/311d///vfqiSeeqGaeeeZ6btPVVlut2mKLLaq55557otscddRR1bnnnlu95z3vqb7whS/0vO+vf/3r9f1mG3bcccee12PkpV3/13/9V/372Wef3fU67W20W9VF5mU8//zzq6uvvrqujs7/0/be/va3V1tuuWX1hje8od9tXnrppbotXXnllXVlYG4z55xzVvPOO2/d5vMZfPOb39z1RERud//991djx46tllxyyWrzzTfvWi1YPPXUU3Vb/+Mf/1hvX9p6Pjf5LGcb09bT7tv98pe/rI477rhq2WWXrQ455JCe953qkfPOO69aZ511qs9//vM9rzejK8PV874nBO0MMEuw+a53vav67W9/W919993Vs88+O9E8oGkjd9xxR/17++3zXl566aX1fjdziOYkVvZdeczsd9NGhnPfWeahy5yl73znO+vPxv/+7//W7SqPm/3nDjvsMGCF6jXXXFPv5//2t7+1nmfaWioAe4W7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aCwBKAAAAADQWAJQAAAAAKCxBKAAAAAAQGMJQAEAAACAxhKAAgAAAACNJQAFAAAAABpLAAoAAAAANJYAFAAAAABoLAEoAAAAANBYAlAAAAAAoLEEoADAiOjr66t+/vOfV+973/uq173uddXYsWOrMWPG1D/33nvvVHvcJZZYon6M9773vVPtMRhel112WattpM0AAMCkEIACwAASxJXgpfNnjjnmqBZeeOFq2WWXrTbffPPq61//eh3UJNhjcLvssku1884716/Z448/Xr3yyisjvUmj0gUXXNBqc9tuu+2QXtdy/Te84Q2DXv8Xv/hF6/qf+cxnhmmrAQBg9BCAAsBkev7556tHHnmkuv3226tf//rX1QEHHFBXMy699NLVj3/8Y0HoAK677rrqZz/7Wf37yiuvXJ111lnVn/70p+ovf/lL/bPooosO+b6aXh241lprVbPMMkv9++WXXz7o9S+99NLW7w8//HD117/+dcjXX3fddadoWwEAYDQaO9IbAADTi9VWW6067rjjWv9/+eWXq3//+991CPrHP/6xOu+886qbb765uvvuu6s99tijmjBhQh3szTfffCO63aPR+eef3/o9r+lKK600otszmr32ta+t3vnOd1ZXX311HWjedttt1XLLLdf1uvfff3/d/mLmmWeuq2oTcKZKebAAdKaZZjItAAAAjaQCFAAmIYhaYYUVWj9vf/vbq3XWWafaZpttqkMOOaSuXMxw5cUXX7xVmbjppptW//nPf0Z600edBx98sPV7rzCP/y+Vxd0qNjuVyzI9Q6ZlGOz69913X3XPPffUvyeEFtYDANBEAlAAGEYbbrhhdcMNN9QL7cRVV11Vffe73x3pzRp1Xnjhhdbvs84664huy/SgfWj6QIFmQvdYY4016rZY/tZrOoZy/c7HAACAJhGAAsAwy4rmWVimOOyww6qnnnqq3/USSiUg3Xfffeuhx4ssskj1mte8pq7eGzduXLXllltWZ5xxRvXqq692fZzjjz++NfflkUceOeh2vfTSS9VCCy1UX3+ZZZaZojlK77rrrmrvvfeuVlxxxWreeeettzvzdm622Wb1c++2ze0LSmXbi87FpYY6j2eZ+7O9OjKLKnXe32DDup988sl6AatUQM4999zVnHPOWb3tbW+r9t9//+pf//rXkLYl10sVcLYlCw8l1J1//vmrd73rXfXcsP/85z+rKZFAc7bZZms9717vXQlH85xTnRyPPfZYdcsttwx4/Wh/Hdvdeeed1Re+8IVqlVVWqRZYYIH6uWXxr/e///3V0UcfXb344otDeg7/+Mc/qq9+9av1c1lwwQXr+3n9619fvec976lPEjzzzDPVlDr11FPr1ynv+xvf+MZ6SgoAAMgBNADQwz333JOkqf5ZZ511Jum2a665Zuu2Z555Zr/Lv/e977UuH+hn3XXX7XviiSf63f7555/vm3/++evrvO1tbxt0e0477bTWfR566KF9kyu3nWWWWQbc5lVWWaXvgQce6PlaDvRz3HHHDWk7Lr300iHdX+f7Nm7cuNbf//jHP/YttthiPW+71FJL9XsenfLezjvvvANuw9xzz9139tln902J973vfa37u+mmm/pdfvfdd7cuv/LKK+u/LbzwwvX/f/jDH3a9z/JajB07tu+pp56a6LJXX321b7/99qsvG+i5Lbvssn233377gNt+xBFH9M0+++wD3s8iiyzSd+211w76XvdqH9/5znf6xowZU1/n7W9/e9/f//73AbcJAIAZhwpQAJhKNt54465DjdsXUUqV4Mc+9rHqmGOOqa+T4fMXXXRRddRRR9UVd/G73/2uvk6nVLql4jEy/+i111474Pb85Cc/qf9NtWa53aRKNes+++xTV5POPvvs1Ze+9KW6ijCruqfyc/XVV6+vl+eRyr4sElWkQrSs8p5K0aL8rfyUuSsH8453vKO+fllNPg466KB+99e+cFVnReIHP/jBehvzPC6++OJ6u88888xq7bXXblW6fuITn+i5DSeffHK11VZb1RWgqfz97//+73rhqyyKlffzwAMPrP+eCuBU9F5xxRXV1JoHtLSxVBBn0aQoVaDdrp+5PzMHaKy66qrVXHPNNdHln/zkJ6tvfvObdTtdfvnlq+9///vVueeeW11//fXVb3/722r33XevV6fPKvPrr79+9eijj3bd7m9/+9vVpz/96er555+vqzK/853vVGeffXZ9P2nrX/ziF+v5dR966KG6qvT222+fpNclCz1l0bEvf/nLdWVshv7ndU5FNQAA1EY6gQWAplaAXnjhha3bbrDBBv0uv+++++oqzoGkAq+zqq/dnXfe2ap6Gz9+fM/7ueOOO1rX22GHHfomx1133dWq/ExF4w033NDvOq+88krfRz/60dY2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" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see from our visualization, there are a couple of findings. One is that we find more recipes that are vegetarian than not-vegetarian and that’s true for each day. This may be more of a red flag for our dataset as some of our recipes should indeed be non-vegetarian heavy, but our tasty matches do not specifically include the meat keyword so it shows up as a non-vegetarian option in our dataset. Otherwise, we can see that we had the most matches for Thursday of all the days and we didn’t find any matches for Monday.</p>
+</section>
 
 </main>
 <!-- /main column -->
